@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS知识点," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Objective-C在iOS开发中不支持垃圾回收（GC）机制，而采用的是引用计数的方式管理内存。    引用计数（Reference Count）在引用计数中，每个对象负责维护对象所引用的计数值。当一个新的引用指向对象时，引用计数就+1，当去掉一个引用时，引用计数就-1。当引用计数为零时，该对象就会被释放。">
+<meta name="keywords" content="iOS知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发-内存管理">
+<meta property="og:url" content="http://yoursite.com/2018/02/08/iOS开发-内存管理/index.html">
+<meta property="og:site_name" content="wenyu&#39;s blogs">
+<meta property="og:description" content="Objective-C在iOS开发中不支持垃圾回收（GC）机制，而采用的是引用计数的方式管理内存。    引用计数（Reference Count）在引用计数中，每个对象负责维护对象所引用的计数值。当一个新的引用指向对象时，引用计数就+1，当去掉一个引用时，引用计数就-1。当引用计数为零时，该对象就会被释放。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/02/08/iOS开发-内存管理/iOS-Memory_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/02/08/iOS开发-内存管理/iOS-Memory_2.jpg">
+<meta property="og:updated_time" content="2018-04-08T10:32:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发-内存管理">
+<meta name="twitter:description" content="Objective-C在iOS开发中不支持垃圾回收（GC）机制，而采用的是引用计数的方式管理内存。    引用计数（Reference Count）在引用计数中，每个对象负责维护对象所引用的计数值。当一个新的引用指向对象时，引用计数就+1，当去掉一个引用时，引用计数就-1。当引用计数为零时，该对象就会被释放。">
+<meta name="twitter:image" content="http://yoursite.com/2018/02/08/iOS开发-内存管理/iOS-Memory_1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/08/iOS开发-内存管理/"/>
+
+
+
+
+
+  <title>iOS开发-内存管理 | wenyu's blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wenyu's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">这个天地，我来过，我奋战过，我深爱过，我不在乎结局。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/iOS开发-内存管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘文裕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wenyu's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS开发-内存管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T14:24:32+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/08/iOS开发-内存管理/" class="leancloud_visitors" data-flag-title="iOS开发-内存管理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Objective-C在iOS开发中不支持垃圾回收（GC）机制，而采用的是引用计数的方式管理内存。  </p>
+</blockquote>
+<h2 id="引用计数（Reference-Count）"><a href="#引用计数（Reference-Count）" class="headerlink" title="引用计数（Reference Count）"></a>引用计数（Reference Count）</h2><p>在引用计数中，每个对象负责维护对象所引用的计数值。当一个新的引用指向对象时，引用计数就+1，当去掉一个引用时，引用计数就-1。当引用计数为零时，该对象就会被释放。<br><a id="more"></a></p>
+<p>关于引用计数的理解可以借助开关房间灯的例子：</p>
+<ol>
+<li>第一个人进入办公室，“需要照明的人数”加1，计数值从0变为1，因此需要开灯；</li>
+<li>之后每当有人进入办公室，“需要照明的人数”就加1。如计数值从1变成2；</li>
+<li>每当有人下班离开办公室，“需要照明的人数”加减1如计数值从2变成1；</li>
+<li>最后一个人下班离开办公室时，“需要照明的人数”减1。计数值从1变成0，因此需要关灯。<br>在这个例子中，<strong>房间的灯</strong>相当于OC中的对象，<strong>进入房间的人</strong>相当于对对象的使用，人数+1则对象的引用计数+1。<img src="/2018/02/08/iOS开发-内存管理/iOS-Memory_1.jpg" title="图片1">
+<h2 id="内存管理的方式"><a href="#内存管理的方式" class="headerlink" title="内存管理的方式"></a>内存管理的方式</h2>无论是MRC还是ARC情况下，OC采用的都是引用计数的方式</li>
+</ol>
+<ul>
+<li>自己生成的对象，自己所持有<br>使用以下名称开头的方法生成的对象意味着只有自己持有：alloc、new、copy、mutableCopy</li>
+<li>非自己生成的对象，自己也能持有<br>除了使用上面的关键词方法生成的对象，其他方式生成的对象，如<br><code>id objc = [NSMutableArray array];</code><br>NSMutableArray通过类方法array产生了对象，objc对象只是接受了NSMutableArray类的赋值，而本身并不持有该对象，需要进行retain方法可以持有该对象。<br><code>[objc retain];</code></li>
+<li>不再需要自己持有的对象时释放<br>自己持有的对象，一旦不再需要，持有者有义务将其释放，释放时使用<code>release</code>方法。<br>即：用alloc、new、copy、mutableCopy方法生成并持有的对象，或者用retain方法持有的对象，一旦不再需要，务必要用release方式进行释放。</li>
+<li>非自己持有的对象无法释放<br>假如release非自己持有的对象，就会造成程序崩溃。</li>
+</ul>
+<p>上面提到了release方法，那么release和autoRelease方法的区别在哪里呢？</p>
+<ol>
+<li>autoRelease提供这样的功能：使对象在超出指定的生存范围时能够自动并正确的释放（调用release方法）。指定的生存范围即autoreleasepool，在这个pool结束时，自动调用release方法释放对象。Autoreleasepool的作用是：<strong>避免频繁申请/释放内存</strong>。调用autorelease方法，可使取得的对象存在，但自己不持有。在对象超出指定生存范围时能够自动并正确地释放——通过将对象注册到autoreleasepool中实现，在最近的pool结束时，自动调用release方法释放对象。<br><strong>特别说明：在函数返回值时，调用autorelease方法后，</strong>返回值对象的释放机制——在每一次事件触发时（即一个运行循环runloop），系统会自动生成一个autoreleasepool，在事件响应结束时，通过释放此pool，来释放那些所调用的函数产生的对象。<br>autoRelease实例方法的本质就是调用NSAutoreleasePool对象的addObject类方法。</li>
+<li>release方法则是立即释放对象。<img src="/2018/02/08/iOS开发-内存管理/iOS-Memory_2.jpg" title="图片2">
+其中提到了内存管理中重要的三个词：生成、持有、释放，再加上“废弃”，就是内存管理中最核心的四个词汇。<h2 id="所有权修饰符（ARC有效时）"><a href="#所有权修饰符（ARC有效时）" class="headerlink" title="所有权修饰符（ARC有效时）"></a>所有权修饰符（ARC有效时）</h2></li>
+</ol>
+<ul>
+<li>__strong修饰符：强引用，持有所指向对象的所有权，无修饰符情况下的默认值。如需强制释放，可置nil。</li>
+<li>__weak修饰符：弱引用，不持有所指向对象的所有权，引用指向的对象内存被回收之后，引用本身会置nil，避免野指针</li>
+<li>__autoreleasing修饰符：自动释放对象的引用，一般用于传递参数</li>
+<li>__unsafe_unretained修饰符：为兼容iOS5以下版本的产物，可以理解成MRC下的weak，现在基本用不到，这里不作描述。<h2 id="循环引用问题"><a href="#循环引用问题" class="headerlink" title="循环引用问题"></a>循环引用问题</h2><blockquote>
+<p>循环引用简单来说就是两个对象相互强引用了对方，即<strong>retain了对方，从而导致谁也释放不了谁的内存泄露问题。</strong>比如声明一个delegate时一般用weak而不能用retain或strong，因为你一旦那么做了，很大可能引起循环引用。  </p>
+</blockquote>
+</li>
+<li>block引起的循环引用<br><strong>主要有两条规则：</strong><br>第一条规则，如果在block中访问了属性，那么block就会retain住self。<br>第二条规则，如果在block中访问了一个局部变量，那么block就会对该变量有一个强引用，即retain该局部变量。<br>根据这两条规则，我们可以知道发生循环引用的情况：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//规则1</span><br><span class="line">self.myblock = ^&#123;</span><br><span class="line">    [self doSomething];           // 访问成员方法</span><br><span class="line">    NSLog(@&quot;%@&quot;, weakSelf.str);   // 访问属性</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//规则2</span><br><span class="line">ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];</span><br><span class="line">[request setCompletionBlock:^&#123;</span><br><span class="line">  NSString* string = [request responseString];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对象对block拥有一个强引用，而block内部又对外部对象有一个强引用，形成了闭环，发生内存泄露。<br>官方给出的解决方案：</p>
+<blockquote>
+<p>In manual reference counting mode, <strong>block id x; has the effect of not retaining x. In ARC mode, </strong>block id x; defaults to retaining x (just like all other values). To get the manual reference counting mode behavior under ARC, you could use <strong>unsafe_unretained </strong>block id x;. As the name <strong>unsafe_unretained implies, however, having a non-retained variable is dangerous (because it can dangle) and is therefore discouraged. Two better options are to either use </strong>weak (if you don’t need to support iOS 4 or OS X v10.6), or set the __block value to nil to break the retain cycle.  </p>
+</blockquote>
+<p>即：<br> 在MRC中，block id x不会retain住x；但是在ARC中，默认是retain住x的，我们需要使用unsafe_unretained __block id x来达到弱引用的效果。</p>
+<p>__weak typeof(self) weakSelf = self;</p>
+<p>修改之后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__weak typedef(self) weakSelf = self;</span><br><span class="line">self.myblock = ^&#123;</span><br><span class="line">    [weakSelf doSomething];           // 访问成员方法</span><br><span class="line">    NSLog(@&quot;%@&quot;, weakSelf.str);   // 访问属性</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>当block中有延时操作时，也会产生循环引用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br><span class="line"></span><br><span class="line">self.block = ^&#123;</span><br><span class="line"></span><br><span class="line">    __strong typeof(self) strongSelf = weakSelf;</span><br><span class="line">    </span><br><span class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        </span><br><span class="line">        strongSelf .....</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>此时weakSelf有可能会在使用前被提前释放，因此需要在dispatch_afert前面增加强引用的相关代码。</p>
+<ul>
+<li><p>NSTimer的问题<br>timer引用了self：target时添加了强引用<br>self又引用了timer：timer是self的成员变量<br>因此，需要在self被释放前将timer invalidate 并且置为nil<br>[timer invalidate];<br>timer = nil;<br>这个是很容易犯的错误，如果这个timer是个重复性的timer，那么self对象就会被timerretain住，这个时候不调用invalidate的话，self对象的引用计数会大于1，dealloc永远不会调用到，这样内存泄露就会发生。</p>
+</li>
+<li><p>delegate的property属性要为weak，否则会产生循环引用。 </p>
+<h2 id="属性修饰符"><a href="#属性修饰符" class="headerlink" title="属性修饰符"></a>属性修饰符</h2><p>属性的参数分为三类，基本数据类型默认为(atomic,readwrite,assign)，对象类型默认为(atomic,readwrite,strong)，其中第三个参数就是该属性的内存管理方式修饰，修饰词可以是以下之一：</p>
+</li>
+</ul>
+<ol>
+<li>assign：直接赋值<br>assign一般用来修饰基本数据类型<br>@property (nonatomic, assign) NSInteger count;<br>当然也可以修饰ObjC对象，但是不推荐，因为被assign修饰的对象释放后，指针还是指向释放前的内存，在后续操作中可能会导致内存问题引发崩溃。</li>
+<li>retain：release旧值，再retain新值（引用计数＋1）<br>retain和strong一样，都用来修饰ObjC对象。<br>使用set方法赋值时，实质上是会先保留新值，再释放旧值，再设置新值，避免新旧值一样时导致对象被释放的的问题。<br>MRC写法如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)setCount:(NSObject *)count &#123;</span><br><span class="line">    [count retain];</span><br><span class="line">    [_count release];</span><br><span class="line">    _count = count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>ARC对应写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> -(void)setCount:(NSObject *)count &#123;</span><br><span class="line">    _count = count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>copy：release旧值，再copy新值（拷贝内容）<br>一般用来修饰String、Dict、Array等需要保护其封装性的对象，尤其是在其内容可变的情况下，因此会拷贝（深拷贝）一份内容給属性使用，避免可能造成的对源内容进行改动。<br>使用set方法赋值时，实质上是会先拷贝新值，再释放旧值，再设置新值。<br>实际上，遵守NSCopying的对象都可以使用copy，当然，如果你确定是要共用同一份可变内容，你也可以使用strong或retain。<br>@property (nonatomic, copy) NSString * name;</li>
+<li>weak：ARC新引入修饰词，可代替assign，比assign多增加一个特性（置nil，见上文）。<br>weak和strong一样用来修饰ObjC对象。<br>使用set方法赋值时，实质上不保留新值，也不释放旧值，只设置新值。<br>比如常用的代理的声明</li>
+</ol>
+<p><code>@property (weak) id&lt;mydelegate&gt; delegate;</code><br>Xib控件的引用</p>
+<p><code>@property (weak, nonatomic) IBOutlet UIImageView *productImage;</code></p>
+<ol>
+<li>strong：ARC新引入修饰词，可代替retain<h2 id="经典内存泄漏"><a href="#经典内存泄漏" class="headerlink" title="经典内存泄漏"></a>经典内存泄漏</h2></li>
+</ol>
+<ul>
+<li>僵尸对象和野指针<br>僵尸对象：内存已经被回收的对象。<br>野指针：指向僵尸对象的指针，向野指针发送消息会导致崩溃。<br>野指针错误形式在Xcode中通常表现为：Thread 1：EXC_BAD_ACCESS，因为你访问了一块已经不属于你的内存。</li>
+<li>循环引用（上面已经提到） </li>
+<li>循环中对象占用内存大<br>这个问题常见于循环次数较大，循环体生成的对象占用内存较大的情景。<br>例子代码：我需要10000个演员来打仗</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; 10000; i ++) &#123;</span><br><span class="line">    Person * soldier = [[Person alloc]init];</span><br><span class="line">    [soldier fight];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该循环内产生大量的临时对象，直至循环结束才释放，可能导致内存泄漏，解决方法和上文中提到的自动释放池常见问题类似：在循环中创建自己的autoReleasePool，及时释放占用内存大的临时变量，减少内存占用峰值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; 10000; i ++) &#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">    Person * soldier = [[Person alloc]init];</span><br><span class="line">    [soldier fight];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而有时候autoReleasePool也不是万能的：<br>例子：假如有2000张图片，每张1M左右，现在需要获取所有图片的尺寸，你会怎么做？<br>如果这样做</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; 2000; i ++) &#123;</span><br><span class="line">    CGSize size = [UIImage imageNamed:[NSString stringWithFormat:@&quot;%d.jpg&quot;,i]].size;</span><br><span class="line">    //add size to array</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用imageNamed方法加载图片占用Cache的内存，autoReleasePool也不能释放，对此问题需要另外的解决方法，当然保险的当然是双管齐下了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; 2000; i ++) &#123;</span><br><span class="line">        @autoreleasepool &#123;</span><br><span class="line">        CGSize size = [UIImage imageWithContentsOfFile:filePath].size;</span><br><span class="line">        //add siez to array</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>无限循环</li>
+</ul>
+<hr>
+<p>参考链接及书籍：</p>
+<ol>
+<li><a href="http://www.cocoachina.com/ios/20160411/15892.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">iOS内功篇：内存管理</a></li>
+<li><a href="https://www.jianshu.com/p/556ba33fa498" target="_blank" rel="noopener">ARC下需要注意的内存管理</a></li>
+<li>《 Objective-C高级编程：iOS与OS X多线程和内存管理》</li>
+</ol>
+<hr>
+<p>关于内存管理的面试题链接：</p>
+<ol>
+<li><a href="https://mp.weixin.qq.com/s/pP9PiiYo8QMp8z0te0fzQA" target="_blank" rel="noopener">内存管理面试题一</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果对您有用，请我喝杯可乐吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.jpg" alt="刘文裕 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="刘文裕 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS知识点/" rel="tag"># iOS知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/25/iOS_BLE/" rel="next" title="iOS开发之BLE">
+                <i class="fa fa-chevron-left"></i> iOS开发之BLE
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/09/iOS开发-KVC底层原理/" rel="prev" title="iOS开发-KVC底层原理">
+                iOS开发-KVC底层原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.JPG"
+                alt="刘文裕" />
+            
+              <p class="site-author-name" itemprop="name">刘文裕</p>
+              <p class="site-description motion-element" itemprop="description">iOS 开发 随笔 杂事</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wenYuL" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3177935202" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/9ba4067bbb30" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wenyugogo@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用计数（Reference-Count）"><span class="nav-number">1.</span> <span class="nav-text">引用计数（Reference Count）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的方式"><span class="nav-number">2.</span> <span class="nav-text">内存管理的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所有权修饰符（ARC有效时）"><span class="nav-number">3.</span> <span class="nav-text">所有权修饰符（ARC有效时）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环引用问题"><span class="nav-number">4.</span> <span class="nav-text">循环引用问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性修饰符"><span class="nav-number">5.</span> <span class="nav-text">属性修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典内存泄漏"><span class="nav-number">6.</span> <span class="nav-text">经典内存泄漏</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘文裕</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RHANP9snWmrCJpyvdWxprN9Y-gzGzoHsz", "7h0R681KwVaUFJYqFsUaBqc0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
