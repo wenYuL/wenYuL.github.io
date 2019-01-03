@@ -419,7 +419,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/newBlog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/Swift引用计数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘文裕">
@@ -438,7 +438,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/03/newBlog/" itemprop="url">Swift引用计数</a></h1>
+                <a class="post-title-link" href="/2018/03/03/Swift引用计数/" itemprop="url">Swift引用计数</a></h1>
         
 
         <div class="post-meta">
@@ -468,7 +468,7 @@
 
           
           
-             <span id="/2018/03/03/newBlog/" class="leancloud_visitors" data-flag-title="Swift引用计数">
+             <span id="/2018/03/03/Swift引用计数/" class="leancloud_visitors" data-flag-title="Swift引用计数">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -500,95 +500,14 @@
 
       
         
-          
-            <h1 id="Swift-自动引用计数（ARC）"><a href="#Swift-自动引用计数（ARC）" class="headerlink" title="Swift 自动引用计数（ARC）"></a>Swift 自动引用计数（ARC）</h1><h3 id="Swift-使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存"><a href="#Swift-使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存" class="headerlink" title="Swift 使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存"></a>Swift 使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存</h3><h3 id="通常情况下我们不需要去手动释放内存，因为-ARC-会在类的实例不再被使用时，自动释放其占用的内存。"><a href="#通常情况下我们不需要去手动释放内存，因为-ARC-会在类的实例不再被使用时，自动释放其占用的内存。" class="headerlink" title="通常情况下我们不需要去手动释放内存，因为 ARC 会在类的实例不再被使用时，自动释放其占用的内存。"></a>通常情况下我们不需要去手动释放内存，因为 ARC 会在类的实例不再被使用时，自动释放其占用的内存。</h3><h3 id="但在有些时候我们还是需要在代码中实现内存管理。"><a href="#但在有些时候我们还是需要在代码中实现内存管理。" class="headerlink" title="但在有些时候我们还是需要在代码中实现内存管理。"></a>但在有些时候我们还是需要在代码中实现内存管理。</h3><h1 id="ARC-功能"><a href="#ARC-功能" class="headerlink" title="ARC 功能"></a>ARC 功能</h1><h3 id="1-当每次使用-init-方法创建一个类的新的实例的时候，ARC-会分配一大块内存用来储存实例的信息。"><a href="#1-当每次使用-init-方法创建一个类的新的实例的时候，ARC-会分配一大块内存用来储存实例的信息。" class="headerlink" title="1.当每次使用 init() 方法创建一个类的新的实例的时候，ARC 会分配一大块内存用来储存实例的信息。"></a>1.当每次使用 init() 方法创建一个类的新的实例的时候，ARC 会分配一大块内存用来储存实例的信息。</h3><h3 id="2-内存中会包含实例的类型信息，以及这个实例所有相关属性的值。"><a href="#2-内存中会包含实例的类型信息，以及这个实例所有相关属性的值。" class="headerlink" title="2.内存中会包含实例的类型信息，以及这个实例所有相关属性的值。"></a>2.内存中会包含实例的类型信息，以及这个实例所有相关属性的值。</h3><h3 id="3-当实例不再被使用时，ARC-释放实例所占用的内存，并让释放的内存能挪作他用。"><a href="#3-当实例不再被使用时，ARC-释放实例所占用的内存，并让释放的内存能挪作他用。" class="headerlink" title="3.当实例不再被使用时，ARC 释放实例所占用的内存，并让释放的内存能挪作他用。"></a>3.当实例不再被使用时，ARC 释放实例所占用的内存，并让释放的内存能挪作他用。</h3><h3 id="4-为了确保使用中的实例不会被销毁，ARC-会跟踪和计算每一个实例正在被多少属性，常量和变量所引用。"><a href="#4-为了确保使用中的实例不会被销毁，ARC-会跟踪和计算每一个实例正在被多少属性，常量和变量所引用。" class="headerlink" title="4.为了确保使用中的实例不会被销毁，ARC 会跟踪和计算每一个实例正在被多少属性，常量和变量所引用。"></a>4.为了确保使用中的实例不会被销毁，ARC 会跟踪和计算每一个实例正在被多少属性，常量和变量所引用。</h3><h3 id="5-实例赋值给属性、常量或变量，它们都会创建此实例的强引用，只要强引用还在，实例是不允许被销毁的。"><a href="#5-实例赋值给属性、常量或变量，它们都会创建此实例的强引用，只要强引用还在，实例是不允许被销毁的。" class="headerlink" title="5.实例赋值给属性、常量或变量，它们都会创建此实例的强引用，只要强引用还在，实例是不允许被销毁的。"></a>5.实例赋值给属性、常量或变量，它们都会创建此实例的强引用，只要强引用还在，实例是不允许被销毁的。</h3><h1 id="ARC-实例"><a href="#ARC-实例" class="headerlink" title="ARC 实例"></a>ARC 实例</h1><p>class Person {<br>    let name: String<br>    init(name: String) {<br>        self.name = name<br>        print(“(name) 开始初始化”)<br>    }<br>    deinit {<br>        print(“(name) 被析构”)<br>    }<br>}</p>
-<p> 值会被自动初始化为nil，目前还不会引用到Person类的实例<br>var reference1: Person?<br>var reference2: Person?<br>var reference3: Person?</p>
-<p> 创建Person类的新实例<br>reference1 = Person(name: “Runoob”)</p>
-<p>赋值给其他两个变量，该实例又会多出两个强引用<br>reference2 = reference1<br>reference3 = reference1</p>
-<p>断开第一个强引用<br>reference1 = nil<br>断开第二个强引用<br>reference2 = nil<br>断开第三个强引用，并调用析构函数<br>reference3 = nil</p>
-<h3 id="以上程序执行输出结果为："><a href="#以上程序执行输出结果为：" class="headerlink" title="以上程序执行输出结果为："></a>以上程序执行输出结果为：</h3><p>Runoob 开始初始化<br>Runoob 被析构</p>
-<h1 id="类实例之间的循环强引用"><a href="#类实例之间的循环强引用" class="headerlink" title="类实例之间的循环强引用"></a>类实例之间的循环强引用</h1><h3 id="在上面的例子中，ARC-会跟踪你所新创建的-Person-实例的引用数量，并且会在-Person-实例不再被需要时销毁它。"><a href="#在上面的例子中，ARC-会跟踪你所新创建的-Person-实例的引用数量，并且会在-Person-实例不再被需要时销毁它。" class="headerlink" title="在上面的例子中，ARC 会跟踪你所新创建的 Person 实例的引用数量，并且会在 Person 实例不再被需要时销毁它。"></a>在上面的例子中，ARC 会跟踪你所新创建的 Person 实例的引用数量，并且会在 Person 实例不再被需要时销毁它。</h3><h3 id="然而，我们可能会写出这样的代码，一个类永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，并让对方不被销毁。这就是所谓的循环强引用。"><a href="#然而，我们可能会写出这样的代码，一个类永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，并让对方不被销毁。这就是所谓的循环强引用。" class="headerlink" title="然而，我们可能会写出这样的代码，一个类永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，并让对方不被销毁。这就是所谓的循环强引用。"></a>然而，我们可能会写出这样的代码，一个类永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，并让对方不被销毁。这就是所谓的循环强引用。</h3><h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h3 id="下面展示了一个不经意产生循环强引用的例子。例子定义了两个类：Person和Apartment，用来建模公寓和它其中的居民"><a href="#下面展示了一个不经意产生循环强引用的例子。例子定义了两个类：Person和Apartment，用来建模公寓和它其中的居民" class="headerlink" title="下面展示了一个不经意产生循环强引用的例子。例子定义了两个类：Person和Apartment，用来建模公寓和它其中的居民:"></a>下面展示了一个不经意产生循环强引用的例子。例子定义了两个类：Person和Apartment，用来建模公寓和它其中的居民:</h3><p>class Person {<br>    let name: String<br>    init(name: String) { self.name = name }<br>    var apartment: Apartment?<br>    deinit { print(“(name) 被析构”) }<br>}</p>
-<p>class Apartment {<br>    let number: Int<br>    init(number: Int) { self.number = number }<br>    var tenant: Person?<br>    deinit { print(“Apartment #(number) 被析构”) }<br>}</p>
-<p> 两个变量都被初始化为nil<br>var runoob: Person?<br>var number73: Apartment?</p>
-<p> 赋值<br>runoob = Person(name: “Runoob”)<br>number73 = Apartment(number: 73)</p>
-<p> 意感叹号是用来展开和访问可选变量 runoob 和 number73 中的实例<br> 循环强引用被创建<br>runoob!.apartment = number73<br>number73!.tenant = runoob</p>
-<p> 断开 runoob 和 number73 变量所持有的强引用时，引用计数并不会降为 0，实例也不会被 ARC 销毁<br> 注意，当你把这两个变量设为nil时，没有任何一个析构函数被调用。<br> 强引用循环阻止了Person和Apartment类实例的销毁，并在你的应用程序中造成了内存泄漏<br>runoob = nil<br>number73 = nil</p>
-<h1 id="解决实例之间的循环强引用"><a href="#解决实例之间的循环强引用" class="headerlink" title="解决实例之间的循环强引用"></a>解决实例之间的循环强引用</h1><h3 id="Swift-提供了两种办法用来解决你在使用类的属性时所遇到的循环强引用问题："><a href="#Swift-提供了两种办法用来解决你在使用类的属性时所遇到的循环强引用问题：" class="headerlink" title="Swift 提供了两种办法用来解决你在使用类的属性时所遇到的循环强引用问题："></a>Swift 提供了两种办法用来解决你在使用类的属性时所遇到的循环强引用问题：</h3><h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><h3 id="无主引用"><a href="#无主引用" class="headerlink" title="无主引用"></a>无主引用</h3><h3 id="弱引用和无主引用允许循环引用中的一个实例引用另外一个实例而不保持强引用。这样实例能够互相引用而不产生循环强引用。"><a href="#弱引用和无主引用允许循环引用中的一个实例引用另外一个实例而不保持强引用。这样实例能够互相引用而不产生循环强引用。" class="headerlink" title="弱引用和无主引用允许循环引用中的一个实例引用另外一个实例而不保持强引用。这样实例能够互相引用而不产生循环强引用。"></a>弱引用和无主引用允许循环引用中的一个实例引用另外一个实例而不保持强引用。这样实例能够互相引用而不产生循环强引用。</h3><h3 id="对于生命周期中会变为nil的实例使用弱引用。相反的，对于初始化赋值后再也不会被赋值为nil的实例，使用无主引用。"><a href="#对于生命周期中会变为nil的实例使用弱引用。相反的，对于初始化赋值后再也不会被赋值为nil的实例，使用无主引用。" class="headerlink" title="对于生命周期中会变为nil的实例使用弱引用。相反的，对于初始化赋值后再也不会被赋值为nil的实例，使用无主引用。"></a>对于生命周期中会变为nil的实例使用弱引用。相反的，对于初始化赋值后再也不会被赋值为nil的实例，使用无主引用。</h3><h1 id="弱引用实例"><a href="#弱引用实例" class="headerlink" title="弱引用实例"></a>弱引用实例</h1><p>class Module {<br>    let name: String<br>    init(name: String) { self.name = name }<br>    var sub: SubModule?<br>    deinit { print(“(name) 主模块”) }<br>}</p>
-<p>class SubModule {<br>    let number: Int</p>
-<pre><code>init(number: Int) { self.number = number }
-
-weak var topic: Module?
-
-deinit { print(“子模块 topic 数为 \(number)”) }
-</code></pre><p>}</p>
-<p>var toc: Module?<br>var list: SubModule?<br>toc = Module(name: “ARC”)<br>list = SubModule(number: 4)<br>toc!.sub = list<br>list!.topic = toc</p>
-<p>toc = nil<br>list = nil</p>
-<h3 id="以上程序执行输出结果为：-1"><a href="#以上程序执行输出结果为：-1" class="headerlink" title="以上程序执行输出结果为："></a>以上程序执行输出结果为：</h3><p>ARC 主模块<br>子模块 topic 数为 4</p>
-<h1 id="无主引用实例"><a href="#无主引用实例" class="headerlink" title="无主引用实例"></a>无主引用实例</h1><p>class Student {<br>    let name: String<br>    var section: Marks?</p>
-<pre><code>init(name: String) {
-    self.name = name
-}
-
-deinit { print(“\(name)”) }
-</code></pre><p>}<br>class Marks {<br>    let marks: Int<br>    unowned let stname: Student</p>
-<pre><code>init(marks: Int, stname: Student) {
-    self.marks = marks
-    self.stname = stname
-}
-
-deinit { print(“学生的分数为 \(marks)”) }
-</code></pre><p>}</p>
-<p>var module: Student?<br>module = Student(name: “ARC”)<br>module!.section = Marks(marks: 98, stname: module!)<br>module = nil</p>
-<h3 id="以上程序执行输出结果为：-2"><a href="#以上程序执行输出结果为：-2" class="headerlink" title="以上程序执行输出结果为："></a>以上程序执行输出结果为：</h3><p>ARC<br>学生的分数为 98</p>
-<h1 id="闭包引起的循环强引用"><a href="#闭包引起的循环强引用" class="headerlink" title="闭包引起的循环强引用"></a>闭包引起的循环强引用</h1><h3 id="循环强引用还会发生在当你将一个闭包赋值给类实例的某个属性，并且这个闭包体中又使用了实例。这个闭包体中可能访问了实例的某个属性，例如self-someProperty，或者闭包中调用了实例的某个方法，例如self-someMethod。这两种情况都导致了闭包-“捕获”-self，从而产生了循环强引用。"><a href="#循环强引用还会发生在当你将一个闭包赋值给类实例的某个属性，并且这个闭包体中又使用了实例。这个闭包体中可能访问了实例的某个属性，例如self-someProperty，或者闭包中调用了实例的某个方法，例如self-someMethod。这两种情况都导致了闭包-“捕获”-self，从而产生了循环强引用。" class="headerlink" title="循环强引用还会发生在当你将一个闭包赋值给类实例的某个属性，并且这个闭包体中又使用了实例。这个闭包体中可能访问了实例的某个属性，例如self.someProperty，或者闭包中调用了实例的某个方法，例如self.someMethod。这两种情况都导致了闭包 “捕获” self，从而产生了循环强引用。"></a>循环强引用还会发生在当你将一个闭包赋值给类实例的某个属性，并且这个闭包体中又使用了实例。这个闭包体中可能访问了实例的某个属性，例如self.someProperty，或者闭包中调用了实例的某个方法，例如self.someMethod。这两种情况都导致了闭包 “捕获” self，从而产生了循环强引用。</h3><h1 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h1><h3 id="下面的例子为你展示了当一个闭包引用了self后是如何产生一个循环强引用的。例子中定义了一个叫HTMLElement的类，用一种简单的模型表示-HTML-中的一个单独的元素："><a href="#下面的例子为你展示了当一个闭包引用了self后是如何产生一个循环强引用的。例子中定义了一个叫HTMLElement的类，用一种简单的模型表示-HTML-中的一个单独的元素：" class="headerlink" title="下面的例子为你展示了当一个闭包引用了self后是如何产生一个循环强引用的。例子中定义了一个叫HTMLElement的类，用一种简单的模型表示 HTML 中的一个单独的元素："></a>下面的例子为你展示了当一个闭包引用了self后是如何产生一个循环强引用的。例子中定义了一个叫HTMLElement的类，用一种简单的模型表示 HTML 中的一个单独的元素：</h3><p>class HTMLElement {</p>
-<pre><code>let name: String
-let text: String?
-
-lazy var asHTML: () -&gt; String = {
-    if let text = self.text {
-        return “&lt;\(self.name)&gt;\(text)&lt;/\(self.name)&gt;”
-    } else {
-        return “&lt;\(self.name) /&gt;”
-    }
-}
-
-init(name: String, text: String? = nil) {
-    self.name = name
-    self.text = text
-}
-
-deinit {
-    print(“\(name) is being deinitialized”)
-}
-</code></pre><p>}</p>
-<p> 创建实例并打印信息<br>var paragraph: HTMLElement? = HTMLElement(name: “p”, text: “hello, world”)<br>print(paragraph!.asHTML())</p>
-<h3 id="HTMLElement-类产生了类实例和-asHTML-默认值的闭包之间的循环强引用。"><a href="#HTMLElement-类产生了类实例和-asHTML-默认值的闭包之间的循环强引用。" class="headerlink" title="HTMLElement 类产生了类实例和 asHTML 默认值的闭包之间的循环强引用。"></a>HTMLElement 类产生了类实例和 asHTML 默认值的闭包之间的循环强引用。</h3><h3 id="实例的-asHTML-属性持有闭包的强引用。但是，闭包在其闭包体内使用了self（引用了self-name和self-text），因此闭包捕获了self，这意味着闭包又反过来持有了HTMLElement实例的强引用。这样两个对象就产生了循环强引用。"><a href="#实例的-asHTML-属性持有闭包的强引用。但是，闭包在其闭包体内使用了self（引用了self-name和self-text），因此闭包捕获了self，这意味着闭包又反过来持有了HTMLElement实例的强引用。这样两个对象就产生了循环强引用。" class="headerlink" title="实例的 asHTML 属性持有闭包的强引用。但是，闭包在其闭包体内使用了self（引用了self.name和self.text），因此闭包捕获了self，这意味着闭包又反过来持有了HTMLElement实例的强引用。这样两个对象就产生了循环强引用。"></a>实例的 asHTML 属性持有闭包的强引用。但是，闭包在其闭包体内使用了self（引用了self.name和self.text），因此闭包捕获了self，这意味着闭包又反过来持有了HTMLElement实例的强引用。这样两个对象就产生了循环强引用。</h3><h3 id="解决闭包引起的循环强引用-在定义闭包时同时定义捕获列表作为闭包的一部分，通过这种方式可以解决闭包和类实例之间的循环强引用。"><a href="#解决闭包引起的循环强引用-在定义闭包时同时定义捕获列表作为闭包的一部分，通过这种方式可以解决闭包和类实例之间的循环强引用。" class="headerlink" title="解决闭包引起的循环强引用:在定义闭包时同时定义捕获列表作为闭包的一部分，通过这种方式可以解决闭包和类实例之间的循环强引用。"></a>解决闭包引起的循环强引用:在定义闭包时同时定义捕获列表作为闭包的一部分，通过这种方式可以解决闭包和类实例之间的循环强引用。</h3><h1 id="弱引用和无主引用"><a href="#弱引用和无主引用" class="headerlink" title="弱引用和无主引用"></a>弱引用和无主引用</h1><h3 id="当闭包和捕获的实例总是互相引用时并且总是同时销毁时，将闭包内的捕获定义为无主引用。"><a href="#当闭包和捕获的实例总是互相引用时并且总是同时销毁时，将闭包内的捕获定义为无主引用。" class="headerlink" title="当闭包和捕获的实例总是互相引用时并且总是同时销毁时，将闭包内的捕获定义为无主引用。"></a>当闭包和捕获的实例总是互相引用时并且总是同时销毁时，将闭包内的捕获定义为无主引用。</h3><h3 id="相反的，当捕获引用有时可能会是nil时，将闭包内的捕获定义为弱引用。"><a href="#相反的，当捕获引用有时可能会是nil时，将闭包内的捕获定义为弱引用。" class="headerlink" title="相反的，当捕获引用有时可能会是nil时，将闭包内的捕获定义为弱引用。"></a>相反的，当捕获引用有时可能会是nil时，将闭包内的捕获定义为弱引用。</h3><h3 id="如果捕获的引用绝对不会置为nil，应该用无主引用，而不是弱引用。"><a href="#如果捕获的引用绝对不会置为nil，应该用无主引用，而不是弱引用。" class="headerlink" title="如果捕获的引用绝对不会置为nil，应该用无主引用，而不是弱引用。"></a>如果捕获的引用绝对不会置为nil，应该用无主引用，而不是弱引用。</h3><h1 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h1><h3 id="前面的HTMLElement例子中，无主引用是正确的解决循环强引用的方法。这样编写HTMLElement类来避免循环强引用："><a href="#前面的HTMLElement例子中，无主引用是正确的解决循环强引用的方法。这样编写HTMLElement类来避免循环强引用：" class="headerlink" title="前面的HTMLElement例子中，无主引用是正确的解决循环强引用的方法。这样编写HTMLElement类来避免循环强引用："></a>前面的HTMLElement例子中，无主引用是正确的解决循环强引用的方法。这样编写HTMLElement类来避免循环强引用：</h3><p>class HTMLElement {</p>
-<pre><code>let name: String
-let text: String?
-
-lazy var asHTML: () -&gt; String = {
-    [unowned self] in
-    if let text = self.text {
-        return “&lt;\(self.name)&gt;\(text)&lt;/\(self.name)&gt;”
-    } else {
-        return “&lt;\(self.name) /&gt;”
-    }
-}
-
-init(name: String, text: String? = nil) {
-    self.name = name
-    self.text = text
-}
-
-deinit {
-    print(“\(name) 被析构”)
-}
-</code></pre><p>}</p>
-<p>创建并打印HTMLElement实例<br>var paragraph: HTMLElement? = HTMLElement(name: “p”, text: “hello, world”)<br>print(paragraph!.asHTML())</p>
-<p> HTMLElement实例将会被销毁，并能看到它的析构函数打印出的消息<br>paragraph = nil</p>
-<h3 id="以上程序执行输出结果为：-3"><a href="#以上程序执行输出结果为：-3" class="headerlink" title="以上程序执行输出结果为："></a>以上程序执行输出结果为：</h3><p></p><p>hello, world</p><br>P 被析构<p></p>
-
-          
+          <h1 id="Swift-自动引用计数（ARC）"><a href="#Swift-自动引用计数（ARC）" class="headerlink" title="Swift 自动引用计数（ARC）"></a>Swift 自动引用计数（ARC）</h1><h3 id="Swift-使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存"><a href="#Swift-使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存" class="headerlink" title="Swift 使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存"></a>Swift 使用自动引用计数（ARC）这一机制来跟踪和管理应用程序的内存</h3><h3 id="通常情况下我们不需要去手动释放内存，因为-ARC-会在类的实例不再被使用时，自动释放其占用的内存。"><a href="#通常情况下我们不需要去手动释放内存，因为-ARC-会在类的实例不再被使用时，自动释放其占用的内存。" class="headerlink" title="通常情况下我们不需要去手动释放内存，因为 ARC 会在类的实例不再被使用时，自动释放其占用的内存。"></a>通常情况下我们不需要去手动释放内存，因为 ARC 会在类的实例不再被使用时，自动释放其占用的内存。</h3>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/03/Swift引用计数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
