@@ -82,7 +82,7 @@
 <meta name="description" content="iOS 开发 随笔 杂事">
 <meta property="og:type" content="website">
 <meta property="og:title" content="wenyu&#39;s blogs">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/8/index.html">
 <meta property="og:site_name" content="wenyu&#39;s blogs">
 <meta property="og:description" content="iOS 开发 随笔 杂事">
 <meta property="og:locale" content="zh-Hans">
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/page/8/"/>
 
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/iOS开发中常用加密算法总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/关于设置iOS-APP启动页图片/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘文裕">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/06/iOS开发中常用加密算法总结/" itemprop="url">iOS开发中常用加密算法总结</a></h1>
+                <a class="post-title-link" href="/2018/01/01/关于设置iOS-APP启动页图片/" itemprop="url">关于设置iOS APP启动页图片</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T16:40:07+08:00">
-                2018-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T15:43:51+08:00">
+                2018-01-01
               </time>
             
 
@@ -333,7 +333,7 @@
 
           
           
-             <span id="/2018/06/06/iOS开发中常用加密算法总结/" class="leancloud_visitors" data-flag-title="iOS开发中常用加密算法总结">
+             <span id="/2018/01/01/关于设置iOS-APP启动页图片/" class="leancloud_visitors" data-flag-title="关于设置iOS APP启动页图片">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -365,10 +365,10 @@
 
       
         
-          <h2 id="SHA"><a href="#SHA" class="headerlink" title="SHA"></a>SHA</h2><h3 id="SHA1"><a href="#SHA1" class="headerlink" title="SHA1"></a>SHA1</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSString</span>*)getSHA1String &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *cstr = [<span class="keyword">self</span> cStringUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">  <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithBytes:cstr length:<span class="keyword">self</span>.length];</span><br><span class="line"> </span><br><span class="line">  uint8_t digest[CC_SHA1_DIGEST_LENGTH];</span><br><span class="line"> </span><br><span class="line">  CC_SHA1(data.bytes, data.length, digest);</span><br><span class="line"> </span><br><span class="line">  <span class="built_in">NSMutableString</span>* output = [<span class="built_in">NSMutableString</span> stringWithCapacity:CC_SHA1_DIGEST_LENGTH * <span class="number">2</span>];</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; CC_SHA1_DIGEST_LENGTH; i++)</span><br><span class="line">    [output appendFormat:<span class="string">@"%02x"</span>, digest[i]];</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">return</span> output;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>APP启动页，即LaunchImages，需要切六张不同尺寸大小的图片，切记一定要选择png格式，否则会导致APP适配失败。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/06/iOS开发中常用加密算法总结/" rel="contents">
+            <a class="btn" href="/2018/01/01/关于设置iOS-APP启动页图片/" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -410,7 +410,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
