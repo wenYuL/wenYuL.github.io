@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="命名规范目录名、类名、文件名均要首字母大写，采用驼峰式命名；有前缀的前缀也要按照驼峰式命名规则。 1OC_MyFisrtViewController 私有变量私有变量在.m中声明，并以下划线_开头，开头字母小写，后边按照驼峰式命名规范书写。 1NSString *_ocString; 属性变量 命名采用小驼峰命名方式，首字母小写，后面每个单词首字母大写 属性的关键字推荐按照原子性，读写，内存管理的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C代码规范">
+<meta property="og:url" content="http://yoursite.com/2019/04/22/Objective-C代码规范/index.html">
+<meta property="og:site_name" content="wenyu&#39;s blogs">
+<meta property="og:description" content="命名规范目录名、类名、文件名均要首字母大写，采用驼峰式命名；有前缀的前缀也要按照驼峰式命名规则。 1OC_MyFisrtViewController 私有变量私有变量在.m中声明，并以下划线_开头，开头字母小写，后边按照驼峰式命名规范书写。 1NSString *_ocString; 属性变量 命名采用小驼峰命名方式，首字母小写，后面每个单词首字母大写 属性的关键字推荐按照原子性，读写，内存管理的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-25T08:33:46.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective-C代码规范">
+<meta name="twitter:description" content="命名规范目录名、类名、文件名均要首字母大写，采用驼峰式命名；有前缀的前缀也要按照驼峰式命名规则。 1OC_MyFisrtViewController 私有变量私有变量在.m中声明，并以下划线_开头，开头字母小写，后边按照驼峰式命名规范书写。 1NSString *_ocString; 属性变量 命名采用小驼峰命名方式，首字母小写，后面每个单词首字母大写 属性的关键字推荐按照原子性，读写，内存管理的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/22/Objective-C代码规范/"/>
+
+
+
+
+
+  <title>Objective-C代码规范 | wenyu's blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wenyu's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">永远相信，美好的事情即将发生！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/Objective-C代码规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘文裕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wenyu's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Objective-C代码规范</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T15:39:25+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/22/Objective-C代码规范/" class="leancloud_visitors" data-flag-title="Objective-C代码规范">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><h3 id="目录名、类名、文件名"><a href="#目录名、类名、文件名" class="headerlink" title="目录名、类名、文件名"></a>目录名、类名、文件名</h3><p>均要首字母大写，采用驼峰式命名；有前缀的前缀也要按照驼峰式命名规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OC_MyFisrtViewController</span><br></pre></td></tr></table></figure>
+<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><p>私有变量在<code>.m</code>中声明，并以下划线<code>_</code>开头，开头字母小写，后边按照驼峰式命名规范书写。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSString *_ocString<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性变量"><a href="#属性变量" class="headerlink" title="属性变量"></a>属性变量</h3><ul>
+<li>命名采用小驼峰命名方式，首字母小写，后面每个单词首字母大写</li>
+<li>属性的关键字推荐按照原子性，读写，内存管理的顺序排列，并且关键字与前面分隔符之间留一个空格。</li>
+<li>相同属性修饰的变量尽量放到一起</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic, copy)NSString *str1;</span><br><span class="line">@property(nonatomic, copy)NSString *str2;</span><br><span class="line"></span><br><span class="line">@property(nonatomic, assign)NSInteger num1;</span><br><span class="line">@property(nonatomic, assign)NSInteger num2;</span><br><span class="line"></span><br><span class="line">//section2</span><br><span class="line">@property(nonatomic, copy)NSString *str1;</span><br><span class="line">@property(nonatomic, copy)NSString *str2;</span><br><span class="line"></span><br><span class="line">@property(nonatomic, assign)NSInteger num1;</span><br><span class="line">@property(nonatomic, assign)NSInteger num2;</span><br><span class="line"></span><br><span class="line">//section3</span><br><span class="line">@property(nonatomic, copy)NSString *str1;</span><br><span class="line">@property(nonatomic, copy)NSString *str2;</span><br><span class="line"></span><br><span class="line">@property(nonatomic, assign)NSInteger num1;</span><br><span class="line">@property(nonatomic, assign)NSInteger num2;</span><br></pre></td></tr></table></figure>
+<h3 id="宏和常量命名"><a href="#宏和常量命名" class="headerlink" title="宏和常量命名"></a>宏和常量命名</h3><ul>
+<li>宏定义的命名字母要全部大写，单词间使用下划线<code>_</code>分隔开</li>
+<li>对于常量类型，在某个编译单元内的，<code>static const</code>修饰，名字以<code>k</code>或者<code>kDefault</code>开头；外部可访问的常量类型，仿照苹果风格，在头文件中进行<code>extern</code>声明，在实现文件中定义其值，采用大驼峰命名方式</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//宏定义的常量</span></span><br><span class="line"><span class="meta">#define ANIMATION_DURATION 0.3</span></span><br><span class="line"><span class="meta">#define MY_MIN(A, B) ((A)&gt;(B)?(B):(A))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//局部类型常量</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> kAnimationDuration = <span class="number">0.3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//外部可见类型常量</span></span><br><span class="line"><span class="comment">//MyViewClass.h</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> MyViewClassAnimationDuration;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> MyViewClassStringConstant;<span class="comment">///字符串类型/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//EOCViewClass.m</span></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> MyViewClassAnimationDuration = <span class="number">0.3</span>;</span><br><span class="line"><span class="built_in">NSString</span> *<span class="keyword">const</span> MyViewClassStringConstant = <span class="string">@"MyStringConstant"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="enum枚举"><a href="#enum枚举" class="headerlink" title="enum枚举"></a>enum枚举</h3><ul>
+<li>Enum类型的命名与类的命名规则一致</li>
+<li>Enum中枚举内容的命名需要以该Enum类型名称开头</li>
+</ul>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typedef <span class="type">NS_ENUM</span>(<span class="type">NSInteger</span>, <span class="type">UIViewAnimationTransition</span>) &#123;</span><br><span class="line">    <span class="type">UIViewAnimationTransitionNone</span>,</span><br><span class="line">    <span class="type">UIViewAnimationTransitionFlipFromLeft</span>,</span><br><span class="line">   <span class="type">UIViewAnimationTransitionFlipFromRight</span>,</span><br><span class="line">   <span class="type">UIViewAnimationTransitionCurlUp</span>,</span><br><span class="line">   <span class="type">UIViewAnimationTransitionCurlDown</span>,</span><br><span class="line">&#125;;</span><br><span class="line">typedef <span class="type">NS_OPTIONS</span>(<span class="type">NSUInteger</span>, <span class="type">UIControlState</span>) &#123;</span><br><span class="line">    <span class="type">UIControlStateNormal</span>         = 0,</span><br><span class="line">    <span class="type">UIControlStateHighlighted</span>  = 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Delegate"><a href="#Delegate" class="headerlink" title="Delegate"></a>Delegate</h3><ul>
+<li>后缀为Delegate</li>
+<li>当委托的方法过多, 可以拆分数据部分和其他逻辑部分, 数据部分用dataSource做后缀</li>
+<li>使用did和will通知Delegate已经发生的变化或将要发生的变化。</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@protocol</span> UITableViewDataSource</span><br><span class="line"><span class="variable">@required</span></span><br><span class="line"><span class="comment">//回调方法存在两个以上参数</span></span><br><span class="line">- (NSInteger)<span class="attribute">tableView</span>:(UITableView *)tableView <span class="attribute">numberOfRowsInSection</span>:(NSInteger)section;</span><br><span class="line"><span class="variable">@optional</span></span><br><span class="line"><span class="comment">//回调方法的参数只有类自己</span></span><br><span class="line">- (NSInteger)<span class="attribute">numberOfSectionsInTableView</span>:(UITableView *)tableView;              <span class="comment">// Default is 1 if not implemented</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@protocol</span> UITableViewDelegate</span><br><span class="line"><span class="variable">@optional</span></span><br><span class="line"><span class="comment">//使用`did`和`will`通知`Delegate`</span></span><br><span class="line">- (nullable NSIndexPath *)<span class="attribute">tableView</span>:(UITableView *)tableView <span class="attribute">willSelectRowAtIndexPath</span>:(NSIndexPath *)indexPath;</span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">tableView</span><span class="selector-pseudo">:(UITableView</span> *)<span class="selector-tag">tableView</span> <span class="selector-tag">didSelectRowAtIndexPath</span><span class="selector-pseudo">:(NSIndexPath</span> *)<span class="selector-tag">indexPath</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>方法名采用小驼峰命名方式</li>
+<li>方法名不要使用new作为前缀</li>
+<li>不要使用<code>and</code>来连接属性参数</li>
+<li>如果方法包含多个参数时，每个参数占用一行，并以冒号对齐</li>
+<li>方法一般不使用前缀名，私有方法可使用前缀名来区分和分组</li>
+<li>对应的方法名要与参数保持高度一致</li>
+<li>表示对象行为方法、执行性的方法应以动词开头</li>
+<li>返回性的方法应以返回的内容作为开头，前面不要加get，除非是间接返回一个或多个值</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不要使用 and 来连接属性参数</span></span><br><span class="line"><span class="selector-tag">-</span> (int)<span class="selector-tag">runModalForDirectory</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">path</span> <span class="selector-tag">file</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">name</span> <span class="selector-tag">types</span><span class="selector-pseudo">:(NSArray</span> *)<span class="selector-tag">fileTypes</span>;    <span class="comment">//推荐</span></span><br><span class="line"><span class="selector-tag">-</span> (int)<span class="selector-tag">runModalForDirectory</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">path</span> <span class="selector-tag">andFile</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">name</span> <span class="selector-tag">andTypes</span><span class="selector-pseudo">:(NSArray</span> *)<span class="selector-tag">fileTypes</span>;    <span class="comment">//反对</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//表示对象行为的方法、执行性的方法</span></span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">insertModel</span><span class="selector-pseudo">:(id)model</span> <span class="selector-tag">atIndex</span><span class="selector-pseudo">:(NSUInteger)atIndex</span>;</span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">selectTabViewItem</span><span class="selector-pseudo">:(NSTableViewItem</span> *)<span class="selector-tag">tableViewItem</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//返回性的方法</span></span><br><span class="line"><span class="selector-tag">-</span> (instancetype)<span class="selector-tag">arrayWithArray</span><span class="selector-pseudo">:(NSArray</span> *)<span class="selector-tag">array</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//参数过长的情况</span></span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">longMethodWith</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">theFoo</span></span><br><span class="line">                  <span class="selector-tag">rect</span><span class="selector-pseudo">:(CGRect)theRect</span></span><br><span class="line">              <span class="selector-tag">interval</span><span class="selector-pseudo">:(CGFloat)theInterval</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//Implementation</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不要加get</span></span><br><span class="line"><span class="selector-tag">-</span> (NSSize) <span class="selector-tag">cellSize</span>;  <span class="comment">//推荐</span></span><br><span class="line"><span class="selector-tag">-</span> (NSSize) <span class="selector-tag">getCellSize</span>;  <span class="comment">//反对</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用情态动词,不要使用do或does</span></span><br><span class="line"><span class="selector-tag">-</span> (BOOL)<span class="selector-tag">canHide</span>;  <span class="comment">//推荐</span></span><br><span class="line"><span class="selector-tag">-</span> (BOOL)<span class="selector-tag">shouldCloseDocument</span>;  <span class="comment">//推荐</span></span><br><span class="line"><span class="selector-tag">-</span> (BOOL)<span class="selector-tag">doesAcceptGlyphInfo</span>;  <span class="comment">//反对</span></span><br></pre></td></tr></table></figure>
+<h2 id="代码注释规范"><a href="#代码注释规范" class="headerlink" title="代码注释规范"></a>代码注释规范</h2><h3 id="import注释"><a href="#import注释" class="headerlink" title="import注释"></a>import注释</h3><p>如果有一个以上的import语句，就对这些语句进行分组，每个分组的注释是可选的。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Frameworks</span></span><br><span class="line"> #<span class="keyword">import</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Models</span></span><br><span class="line"> #<span class="keyword">import</span> <span class="string">"NYTUser.h"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Views</span></span><br><span class="line"> #<span class="keyword">import</span> <span class="string">"NYTButton.h"</span></span><br><span class="line"> #<span class="keyword">import</span> <span class="string">"NYTUserView.h"</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性注释"><a href="#属性注释" class="headerlink" title="属性注释"></a>属性注释</h3><p>写在属性之后，用两个空格隔开<br>==例：==</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readwrite</span>, <span class="keyword">strong</span>) <span class="built_in">UIView</span> *headerView;  <span class="comment">//注释</span></span><br></pre></td></tr></table></figure>
+<h3 id="方法声明注释："><a href="#方法声明注释：" class="headerlink" title="方法声明注释："></a>方法声明注释：</h3><p>一个函数(方法)必须有一个字符串文档来解释，除非它：</p>
+<ol>
+<li>非公开，私有函数。</li>
+<li>很短。</li>
+<li>显而易见。</li>
+</ol>
+<p>而其余的，包括公开接口，重要的方法，分类，以及协议，都应该伴随文档（注释）：<br>以/开始<br>第二行是总结性的语句<br>第三行永远是空行<br>在与第二行开头对齐的位置写剩下的注释。</p>
+<p>建议这样写：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/This comment serves <span class="built_in">to</span> demonstrate <span class="keyword">the</span> <span class="built_in">format</span> <span class="keyword">of</span> <span class="keyword">a</span> doc <span class="keyword">string</span>.</span><br><span class="line"></span><br><span class="line">Note that <span class="keyword">the</span> summary <span class="built_in">line</span> is always <span class="keyword">at</span> most <span class="literal">one</span> <span class="built_in">line</span> <span class="keyword">long</span>, <span class="keyword">and</span> <span class="keyword">after</span> <span class="keyword">the</span> opening block comment,</span><br><span class="line"><span class="keyword">and</span> <span class="keyword">each</span> <span class="built_in">line</span> <span class="keyword">of</span> <span class="keyword">text</span> is preceded <span class="keyword">by</span> <span class="keyword">a</span> single <span class="literal">space</span>.</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p>方法的注释使用Xcode自带注释快捷键:Commond+option+/</p>
+<p>==例：==</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"><span class="doctag">@param</span> tableView</span></span><br><span class="line"><span class="comment"><span class="doctag">@param</span> section</span></span><br><span class="line"><span class="comment">&lt;a href='http://www.jobbole.com/members/wx1409399284'&gt;<span class="doctag">@return</span>&lt;/a&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">- (CGFloat)<span class="string">tableView:</span>(UITableView *)tableView <span class="string">heightForHeaderInSection:</span>(NSInteger)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码块注释"><a href="#代码块注释" class="headerlink" title="代码块注释"></a>代码块注释</h3><p>单行的用//+空格开头，多行的采用/<em> </em>/注释</p>
+<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><p>使用//TODO:说明 标记一些未完成的或完成的不尽如人意的地方</p>
+<p>==例：==</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//<span class="doctag">TODO:</span>增加初始化</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码格式化规范"><a href="#代码格式化规范" class="headerlink" title="代码格式化规范"></a>代码格式化规范</h2><h3 id="指针-位置"><a href="#指针-位置" class="headerlink" title="指针*位置"></a>指针*位置</h3><ul>
+<li>指针 *靠近变量名<br>==例:== </li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSString *userName<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="方法的声明和定义"><a href="#方法的声明和定义" class="headerlink" title="方法的声明和定义"></a>方法的声明和定义</h3><p>在 - 、+和 返回值之间留一个空格，方法名和第一个参数之间不留空格<br>==例：==</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>insertSubview:<span class="params">(UIView *)</span>view atIndex:<span class="params">(NSInteger)</span>index;</span><br></pre></td></tr></table></figure>
+<h3 id="代码缩进"><a href="#代码缩进" class="headerlink" title="代码缩进"></a>代码缩进</h3><p>不要在工程里使用 Tab 键，使用空格来进行缩进。在 Xcode &gt; Preferences &gt; Text Editing 将 Tab 和自动缩进都设置为 4 个空格</p>
+<p>Method与Method之间空一行</p>
+<p>一元运算符与变量之间没有空格、二元运算符与变量之间必须有空格</p>
+<p>==例：==</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">!<span class="keyword">bValue</span></span><br><span class="line"><span class="keyword">fLength </span>= fWidth * <span class="number">2</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">- (void)sampleMethod1<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">- (void)sampleMethod2<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="对method进行分组"><a href="#对method进行分组" class="headerlink" title="对method进行分组"></a>对method进行分组</h3><p>使用#pragma mark -对method进行分组</p>
+<p><strong>pragma mark - Life Cycle Methods</strong></p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> (instancetype)init</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby">- (void)dealloc</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby">- (void)<span class="symbol">viewWillAppear:</span>(BOOL)animated</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby">- (void)<span class="symbol">viewDidAppear:</span>(BOOL)animated</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby">- (void)<span class="symbol">viewWillDisappear:</span>(BOOL)animated</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby">- (void)<span class="symbol">viewDidDisappear:</span>(BOOL)animated</span></span><br></pre></td></tr></table></figure>
+<p> <strong>#pragma mark - Override Methods</strong></p>
+<p> <strong>#pragma mark - Intial Methods</strong></p>
+<p><strong>#pragma mark - Network Methods</strong></p>
+<p><strong>#pragma mark - Target Methods</strong></p>
+<p><strong>#pragma mark - Public Methods</strong></p>
+<p><strong>#pragma mark - Private Methods</strong></p>
+<p><strong>#pragma mark - UITableViewDataSource</strong> </p>
+<p><strong>#pragma mark - UITableViewDelegate</strong> </p>
+<p><strong>#pragma mark - Lazy Loads</strong></p>
+<p><strong>#pragma mark - NSCopying</strong>  </p>
+<p><strong>#pragma mark - NSObject  Methods</strong></p>
+<h3 id="大括号写法"><a href="#大括号写法" class="headerlink" title="大括号写法"></a>大括号写法</h3><p>对于类的method:左括号另起一行写(遵循苹果官方文档)<br>对于其他使用场景(if,for,while,switch等): 左括号跟在第一行后边</p>
+<p>==例：==</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)sampleMethod</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">BOOL</span> someCondition = <span class="literal">YES</span>;</span><br><span class="line">    <span class="keyword">if</span>(someCondition) &#123;</span><br><span class="line">        <span class="comment">// do something here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="property变量"><a href="#property变量" class="headerlink" title="property变量"></a>property变量</h3><p>==例：==</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readwrite</span>, <span class="keyword">strong</span>) <span class="built_in">UIView</span> *headerView;    <span class="comment">//注释</span></span><br></pre></td></tr></table></figure>
+<h2 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a>编码规范</h2><h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><ul>
+<li>须列出所有分支（穷举所有的情况），而且每个分支都须给出明确的结果。</li>
+</ul>
+<p>==推荐这样写：==</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var</span> hintStr;</span><br><span class="line"><span class="attribute">if</span> (count &lt; <span class="number">3</span>) &#123;</span><br><span class="line">  <span class="attribute">hintStr</span> = <span class="string">"Good"</span>;</span><br><span class="line">&#125; <span class="section">else</span> &#123;</span><br><span class="line">  <span class="attribute">hintStr</span> = <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>==不推荐这样写：==</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var hintStr<span class="comment">;</span></span><br><span class="line">if (<span class="built_in">count</span> &lt; <span class="number">3</span>) &#123;</span><br><span class="line"> hintStr = <span class="string">"Good"</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不要使用过多的分支，要善于使用return来提前返回错误的情况，把最正确的情况放到最后返回。</li>
+</ul>
+<p>==推荐这样写：==</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!user.UserName) <span class="keyword">return</span> NO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!user.Password) <span class="keyword">return</span> NO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!user.Email) <span class="keyword">return</span> NO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> YES;</span><br></pre></td></tr></table></figure>
+<p>==不推荐这样写：==</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BOOL <span class="built_in">isValid</span> = NO;</span><br><span class="line"><span class="built_in">if</span> (user.UserName)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">if</span> (user.Password)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">if</span> (user.Email) <span class="built_in">isValid</span> = YES;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">return</span> <span class="built_in">isValid</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>条件过多，过长的时候应该换行。条件表达式如果很长，则需要将他们提取出来赋给一个BOOL值，或者抽取出一个方法</li>
+</ul>
+<p>==推荐这样写：==</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition1 &amp;&amp;</span><br><span class="line">    condition2 &amp;&amp;</span><br><span class="line">    condition3 &amp;&amp;</span><br><span class="line">    condition4) &#123;</span><br><span class="line">  <span class="comment">// Do something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">BOOL</span> finalCondition = condition1 &amp;&amp; condition2 &amp;&amp; condition3 &amp;&amp; condition4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (finalCondition) &#123;</span><br><span class="line">  <span class="comment">// Do something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> canDelete])&#123;</span><br><span class="line">  <span class="comment">// Do something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)canDelete</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">BOOL</span> finalCondition1 = condition1 &amp;&amp; condition2</span><br><span class="line">    <span class="built_in">BOOL</span> finalCondition2 =  condition3 &amp;&amp; condition4</span><br><span class="line">    <span class="keyword">return</span> condition1 &amp;&amp; condition2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>==不推荐这样写：==</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">(condition1 &amp;&amp; condition2 &amp;&amp; condition3 &amp;&amp; condition4)</span> &#123;</span><br><span class="line">  <span class="comment">// Do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>条件语句的判断应该是变量在右，常量在左。</li>
+</ul>
+<p>==推荐：==</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="number">6</span> == count) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (nil == <span class="class"><span class="keyword">object</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="class"><span class="keyword">object</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>==不推荐：==</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (count == <span class="number">6</span>) <span class="comment">&#123;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">object</span> == <span class="keyword">nil</span>) <span class="comment">&#123;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>if (object == nil)容易误写成赋值语句,if (!object)写法很简洁</p>
+<ul>
+<li>每个分支的实现代码都须被大括号包围</li>
+</ul>
+<p>==推荐：==</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="keyword">error</span>) &#123;</span><br><span class="line"><span class="built_in">  return</span> success;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>==不推荐：==</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="keyword">error</span>)</span><br><span class="line"><span class="built_in">    return</span> success;</span><br></pre></td></tr></table></figure>
+<p>可以如下这样写：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="keyword">error</span>) <span class="literal">return</span> success;</span><br></pre></td></tr></table></figure>
+<h3 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h3><ul>
+<li>不可在for循环内修改循环变量，防止for循环失去控制。</li>
+</ul>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> <span class="keyword">index</span> = <span class="number">0</span>; <span class="keyword">index</span> &lt; <span class="number">10</span>; <span class="keyword">index</span>++)&#123;</span><br><span class="line">   ...</span><br><span class="line">   logicToChange(<span class="keyword">index</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>避免使用continue和break。</li>
+</ul>
+<p>continue和break所描述的是“什么时候不做什么”，所以为了读懂二者所在的代码，我们需要在头脑里将他们取反。</p>
+<p>其实最好不要让这两个东西出现，因为我们的代码只要体现出“什么时候做什么”就好了，而且通过适当的方法，是可以将这两个东西消灭掉的：</p>
+<p>如果出现了continue，只需要把continue的条件取反即可</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> filteredProducts = <span class="keyword">Array</span>()</span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> products &#123;</span><br><span class="line">    <span class="keyword">if</span> level.hasPrefix(<span class="string">"bad"</span>) &#123;</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    filteredProducts.append(level)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，通过判断字符串里是否含有“bad”这个prefix来过滤掉一些值。其实我们是可以通过取反，来避免使用continue的：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> products &#123;</span><br><span class="line">    <span class="keyword">if</span> !level.hasPrefix(<span class="string">"bad"</span>) &#123;</span><br><span class="line">      filteredProducts.<span class="built_in">append</span>(level)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>消除while里的break：将break的条件取反，并合并到主循环里</p>
+<p>在while里的break其实就相当于“不存在”，既然是不存在的东西就完全可以在最开始的条件语句中将其排除。</p>
+<p>while里的break：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="comment">(condition1)</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> <span class="comment">(condition2)</span> &#123;</span><br><span class="line">    break;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>取反并合并到主条件：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="comment">(condition1 &amp;&amp; !condition2)</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在有返回值的方法里消除break：将break转换为return立即返回</p>
+<p>有人喜欢这样做：在有返回值的方法里break之后，再返回某个值。其实完全可以在break的那一行直接返回。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hasBadProductIn</span><span class="params">(products: Array)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="literal">false</span>    </span><br><span class="line">    <span class="keyword">for</span> level <span class="keyword">in</span> products &#123;</span><br><span class="line">        <span class="keyword">if</span> level.hasPrefix(<span class="string">"bad"</span>) &#123;</span><br><span class="line">            result = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>遇到错误条件直接返回：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hasBadProductIn</span><span class="params">(products: Array)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> level <span class="keyword">in</span> products &#123;</span><br><span class="line">        <span class="keyword">if</span> level.hasPrefix(<span class="string">"bad"</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样写的话不用特意声明一个变量来特意保存需要返回的值，看起来非常简洁，可读性高。</p>
+<h3 id="Switch语句"><a href="#Switch语句" class="headerlink" title="Switch语句"></a>Switch语句</h3><ul>
+<li>每个分支都必须用大括号括起来</li>
+</ul>
+<p>推荐这样写：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (integer) &#123;  </span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>:  &#123;</span><br><span class="line">    <span class="comment">// ...  </span></span><br><span class="line">   &#125;</span><br><span class="line">    <span class="keyword">break</span>;  </span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span>: &#123;  </span><br><span class="line">    <span class="comment">// ...  </span></span><br><span class="line">    <span class="keyword">break</span>;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">default</span>:&#123;</span><br><span class="line">    <span class="comment">// ...  </span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用枚举类型时，不能有default分支， 除了使用枚举类型以外，都必须有default分支</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">RWTLeftMenuTopItemType menuType = RWTLeftMenuTopItemMain;  </span><br><span class="line"><span class="keyword">switch</span> (menuType) &#123;  </span><br><span class="line">  <span class="keyword">case</span> <span class="string">RWTLeftMenuTopItemMain:</span> &#123;</span><br><span class="line">    <span class="comment">// ...  </span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">RWTLeftMenuTopItemShows:</span> &#123;</span><br><span class="line">    <span class="comment">// ...  </span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">RWTLeftMenuTopItemSchedule:</span> &#123;</span><br><span class="line">    <span class="comment">// ...  </span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Switch语句使用枚举类型的时候，如果使用了default分支，在将来就无法通过编译器来检查新增的枚举类型了。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li>一个函数只做一件事（单一原则）</li>
+</ul>
+<p>每个函数的职责都应该划分的很明确（就像类一样）。</p>
+<p>==推荐：==</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">dataConfiguration</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="title">viewConfiguration</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<p>==不推荐：==</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dataConfiguration</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">   ...</span><br><span class="line">   viewConfiguration()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于有返回值的函数（方法），每一个分支都必须有返回值</li>
+</ul>
+<p>==推荐：==</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(condition1)&#123;</span><br><span class="line">        <span class="keyword">return</span> count1</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(condition2)&#123;</span><br><span class="line">        <span class="keyword">return</span> count2</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> defaultCount</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>==不推荐：==</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(condition1)&#123;</span><br><span class="line">        <span class="keyword">return</span> count1</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(condition2)&#123;</span><br><span class="line">        <span class="keyword">return</span> count2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对输入参数的正确性和有效性进行检查，参数错误立即返回</li>
+</ul>
+<p>==推荐：==</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span><span class="params">(param1,param2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(param1 <span class="keyword">is</span> unavailable)&#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(param2 <span class="keyword">is</span> unavailable)&#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">//Do some right thing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果在不同的函数内部有相同的功能，应该把相同的功能抽取出来单独作为另一个函数</li>
+</ul>
+<p>原来的调用：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void logic<span class="comment">()</span> &#123;</span><br><span class="line">  a<span class="comment">()</span>;</span><br><span class="line">  b<span class="comment">()</span>；</span><br><span class="line">  <span class="keyword">if</span> <span class="comment">(logic1 condition)</span> &#123;</span><br><span class="line">    c<span class="comment">()</span>;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    d<span class="comment">()</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将a，b函数抽取出来作为单独的函数</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">void</span> <span class="selector-tag">basicConfig</span>() &#123;</span><br><span class="line">  <span class="selector-tag">a</span>();</span><br><span class="line">  <span class="selector-tag">b</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">void</span> <span class="selector-tag">logic1</span>() &#123;</span><br><span class="line">  <span class="selector-tag">basicConfig</span>();</span><br><span class="line">  <span class="selector-tag">c</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">void</span> <span class="selector-tag">logic2</span>() &#123;</span><br><span class="line">  <span class="selector-tag">basicConfig</span>();</span><br><span class="line">  <span class="selector-tag">d</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将函数内部比较复杂的逻辑提取出来作为单独的函数</li>
+</ul>
+<p>一个函数内的不清晰（逻辑判断比较多，行数较多）的那片代码，往往可以被提取出去，构成一个新的函数，然后在原来的地方调用它这样你就可以使用有意义的函数名来代替注释，增加程序的可读性。</p>
+<p>举一个发送邮件的例子：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">openEmailSite()<span class="comment">;</span></span><br><span class="line">login()<span class="comment">;</span></span><br><span class="line">writeTitle(<span class="name">title</span>)<span class="comment">;</span></span><br><span class="line">writeContent(<span class="name">content</span>)<span class="comment">;</span></span><br><span class="line">writeReceiver(<span class="name">receiver</span>)<span class="comment">;</span></span><br><span class="line">addAttachment(<span class="name">attachment</span>)<span class="comment">;</span></span><br><span class="line">send()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>中间的部分稍微长一些，我们可以将它们提取出来：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">void</span> <span class="selector-tag">writeEmail</span>(title, content,receiver,attachment)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="selector-tag">writeTitle</span>(title);</span><br><span class="line">  <span class="selector-tag">writeContent</span>(content);</span><br><span class="line">  <span class="selector-tag">writeReceiver</span>(receiver);</span><br><span class="line">  <span class="selector-tag">addAttachment</span>(attachment);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后再看一下原来的代码：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openEmailSite()<span class="comment">;</span></span><br><span class="line">login()<span class="comment">;</span></span><br><span class="line">writeEmail(<span class="name">title</span>, content,receiver,attachment)</span><br><span class="line">send()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果对您有用，请我喝杯可乐吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.jpg" alt="刘文裕 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="刘文裕 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/iOS开发中常用加密算法总结/" rel="next" title="iOS开发中常用加密算法总结">
+                <i class="fa fa-chevron-left"></i> iOS开发中常用加密算法总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.JPG"
+                alt="刘文裕" />
+            
+              <p class="site-author-name" itemprop="name">刘文裕</p>
+              <p class="site-description motion-element" itemprop="description">iOS 开发 随笔 杂事</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wenYuL" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3177935202" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/9ba4067bbb30" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wenyugogo@sina.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名规范"><span class="nav-number">1.</span> <span class="nav-text">命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录名、类名、文件名"><span class="nav-number">1.1.</span> <span class="nav-text">目录名、类名、文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有变量"><span class="nav-number">1.2.</span> <span class="nav-text">私有变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性变量"><span class="nav-number">1.3.</span> <span class="nav-text">属性变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#宏和常量命名"><span class="nav-number">1.4.</span> <span class="nav-text">宏和常量命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enum枚举"><span class="nav-number">1.5.</span> <span class="nav-text">enum枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delegate"><span class="nav-number">1.6.</span> <span class="nav-text">Delegate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.7.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码注释规范"><span class="nav-number">2.</span> <span class="nav-text">代码注释规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import注释"><span class="nav-number">2.1.</span> <span class="nav-text">import注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性注释"><span class="nav-number">2.2.</span> <span class="nav-text">属性注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法声明注释："><span class="nav-number">2.3.</span> <span class="nav-text">方法声明注释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块注释"><span class="nav-number">2.4.</span> <span class="nav-text">代码块注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TODO"><span class="nav-number">2.5.</span> <span class="nav-text">TODO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码格式化规范"><span class="nav-number">3.</span> <span class="nav-text">代码格式化规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针-位置"><span class="nav-number">3.1.</span> <span class="nav-text">指针*位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法的声明和定义"><span class="nav-number">3.2.</span> <span class="nav-text">方法的声明和定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码缩进"><span class="nav-number">3.3.</span> <span class="nav-text">代码缩进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对method进行分组"><span class="nav-number">3.4.</span> <span class="nav-text">对method进行分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大括号写法"><span class="nav-number">3.5.</span> <span class="nav-text">大括号写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property变量"><span class="nav-number">3.6.</span> <span class="nav-text">property变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码规范"><span class="nav-number">4.</span> <span class="nav-text">编码规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if语句"><span class="nav-number">4.1.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for语句"><span class="nav-number">4.2.</span> <span class="nav-text">for语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch语句"><span class="nav-number">4.3.</span> <span class="nav-text">Switch语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">4.4.</span> <span class="nav-text">函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘文裕</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RHANP9snWmrCJpyvdWxprN9Y-gzGzoHsz", "7h0R681KwVaUFJYqFsUaBqc0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
