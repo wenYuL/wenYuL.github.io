@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_1.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_2.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_3.png">
-<meta property="og:updated_time" content="2019-04-28T07:43:41.636Z">
+<meta property="og:updated_time" content="2019-04-28T10:08:12.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime编译环境搭建">
 <meta name="twitter:description" content="首先，需要准备的资源：runtime完整源码，这个可以在苹果开放资源网页找到。点进这个页面，接着点击macOS下面的最新版本，在新页面中command+f搜索objc即可找到runtime源码，再点击右边的下载按钮即可得到。 到这里runtime源码已经准备好，除此之外，runtime源码的编译还需要添加一些必要的依赖。点击这里可以直达下载页面。 在这个资源页面找到以下开源代码，下载好合适的版本，">
@@ -365,7 +365,7 @@
 <ul>
 <li><p>使用命令行：<br>进入刚才创建的开源代码目录下 cd ../opensources，这里需要按照自己的实际路径来cd</p>
 <p>搜索文件名 find . -name ‘reason.h’</p>
-<p>可以看到搜索结果显示在./xnu-4903.221.2/bsd/sys/reason.h中，按照这个路径找到reason.h文件，根据编译错误提示知道，这个reason.h文件在路径sys下，那么在已创建的include文件下创建一个新的sys文件夹，里面放入找到的reason.h文件：</p>
+<p>可以看到搜索结果显示在./xnu-4903.221.2/bsd/sys/reason.h中，按照这个路径找到reason.h文件，根据编译错误提示知道，这个reason.h文件在路径sys下，那么在已创建的include文件下创建一个新的sys文件夹，里面放入找到的reason.h文件。</p>
 </li>
 <li><p>普通搜索<br>   直接在Opensource中搜索reason.h文件，接下来处理和上述一样。</p>
 </li>
@@ -373,13 +373,20 @@
 </li>
 <li><p>提示’os/lock_private.h’ file not found<br>选择./libplatform-177.200.16/private/os/lock_private.h</p>
 </li>
-<li>提示’os/base_private.h’ file not found<br>选择./libplatform-177.200.16/private/os/base_private.h</li>
-<li>提示’pthread/tsd_private.h’ file not found<br>选择./libpthread-330.220.2/private/tsd_private.h</li>
-<li>提示’System/machine/cpu_capabilities.h’ file not found<br>选择./xnu-4903.221.2/osfmk/machine/cpu_capabilities.h</li>
-<li>提示’os/tsd.h’ file not found<br>选择./xnu-4903.221.2/libsyscall/os/tsd.h</li>
-<li>提示’pthread/spinlock_private.h’ file not found<br>选择./libpthread-330.220.2/private/spinlock_private.h</li>
-<li>提示’System/pthread_machdep.h’ file not found<br>选择./Libc-825.40.1 2/pthreads/pthread_machdep.h</li>
-<li>提示Typedef redefinition with different types (‘int’ vs ‘volatile OSSpinLock’ (aka ‘volatile int’))<br>  这种redefinition错误时，在include文件夹下使用grep命令：</li>
+<li><p>提示’os/base_private.h’ file not found<br>选择./libplatform-177.200.16/private/os/base_private.h</p>
+</li>
+<li><p>提示’pthread/tsd_private.h’ file not found<br>选择./libpthread-330.220.2/private/tsd_private.h</p>
+</li>
+<li><p>提示’System/machine/cpu_capabilities.h’ file not found<br>选择./xnu-4903.221.2/osfmk/machine/cpu_capabilities.h</p>
+</li>
+<li><p>提示’os/tsd.h’ file not found<br>选择./xnu-4903.221.2/libsyscall/os/tsd.h</p>
+</li>
+<li><p>提示’pthread/spinlock_private.h’ file not found<br>选择./libpthread-330.220.2/private/spinlock_private.h</p>
+</li>
+<li><p>提示’System/pthread_machdep.h’ file not found<br>选择./Libc-825.40.1 2/pthreads/pthread_machdep.h</p>
+</li>
+<li><p>提示Typedef redefinition with different types (‘int’ vs ‘volatile OSSpinLock’ (aka ‘volatile int’))<br>  这种redefinition错误时，在include文件夹下使用grep命令：</p>
+</li>
 </ul>
 <figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如 重复定义 pthread_lock_t</span></span><br><span class="line">grep -rne <span class="string">"typedef.*pthread_lock_t” .</span></span><br><span class="line"><span class="string">// 输出</span></span><br><span class="line"><span class="string">./pthread/spinlock_private.h:59:typedef volatile OSSpinLock pthread_lock_t __deprecated_msg("</span><span class="keyword">Use</span> &lt;<span class="title">os</span>/<span class="title">lock</span>.<span class="title">h</span>&gt; <span class="title">instead</span>”);</span><br><span class="line">./System/pthread_machdep.h:<span class="number">214</span>:typedef <span class="keyword">int</span> pthread_lock_t;</span><br></pre></td></tr></table></figure>
 <p>可以看见有两处定义了pthread_lock_t，注释掉pthread_machdep.h文件中的定义即可。</p>
@@ -390,14 +397,19 @@
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">grep -re <span class="string">"_pthread_has_direct_tsd(void)” .</span></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">./pthread/tsd_private.h:_pthread_has_direct_tsd(void)</span><br><span class="line">./System/pthread_machdep.h:_pthread_has_direct_tsd(void)</span><br><span class="line"> grep -re <span class="string">"_pthread_getspecific_direct(unsigned long slot)” .</span></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">./pthread/tsd_private.h:_pthread_getspecific_direct(unsigned long slot)</span><br><span class="line">./System/pthread_machdep.h:_pthread_getspecific_direct(unsigned long slot)</span><br><span class="line">grep -re <span class="string">"_pthread_setspecific_direct(unsigned long slot, void \* val)” .</span></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">./pthread/tsd_private.h:_pthread_setspecific_direct(unsigned long slot, void * val)</span><br><span class="line">./System/pthread_machdep.h:_pthread_setspecific_direct(unsigned long slot, void * val)</span><br><span class="line">这里选择把pthread_machdep.h文件中的定义注释掉。</span><br></pre></td></tr></table></figure>
 <p><strong>注意：在pthread_machdep.h文件中注释代码时，要把整个函数代码全部注释掉，上面三个都要注释掉</strong></p>
 <ul>
-<li>提示’CrashReporterClient.h’ file not found<br>选择./Libc-825.40.1 2/include/CrashReporterClient.h，放入include文件夹下之后还是报错，需要在Build Settings-&gt;Preprocessor Macros中加入：LIBC_NO_LIBCRASHREPORTERCLIENT</li>
-<li>提示’Block_private.h’ file not found<br>选择./libdispatch-1008.220.2/src/BlocksRuntime/Block_private.h</li>
-<li>提示’objc-shared-cache.h’ file not found<br>选择./dyld-551.3/include/objc-shared-cache.h</li>
-<li>提示Use of undeclared identifier ‘DYLD_MACOSX_VERSION_10_13<br>在 dyld_priv.h 文件顶部加入一下宏：</li>
+<li><p>提示’CrashReporterClient.h’ file not found<br>选择./Libc-825.40.1 2/include/CrashReporterClient.h，放入include文件夹下之后还是报错，需要在Build Settings-&gt;Preprocessor Macros中加入：LIBC_NO_LIBCRASHREPORTERCLIENT</p>
+</li>
+<li><p>提示’Block_private.h’ file not found<br>选择./libdispatch-1008.220.2/src/BlocksRuntime/Block_private.h</p>
+</li>
+<li><p>提示’objc-shared-cache.h’ file not found<br>选择./dyld-551.3/include/objc-shared-cache.h</p>
+</li>
+<li><p>提示Use of undeclared identifier ‘DYLD_MACOSX_VERSION_10_13<br>在 dyld_priv.h 文件顶部加入一下宏：</p>
+</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DYLD_MACOSX_VERSION_10_11 0x000A0B00</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DYLD_MACOSX_VERSION_10_12 0x000A0C00</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DYLD_MACOSX_VERSION_10_13 0x000A0D00</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DYLD_MACOSX_VERSION_10_14 0x000A0E00</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>提示’_simple.h’ file not found<br>选择./libplatform-177.200.16/private/_simple.h</li>
+<li><p>提示’_simple.h’ file not found<br>选择./libplatform-177.200.16/private/_simple.h</p>
+</li>
 <li><p>提示’isa.h’ file not found<br>isa.h文件在项目的runtime文件夹中，新加入的一个头文件。<br>直接把它引入include文件夹中去即可。</p>
 </li>
 <li><p>提示</p>
@@ -406,10 +418,13 @@
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">can't <span class="keyword">open</span> <span class="keyword">order</span> <span class="keyword">file</span>: /Applications/Xcode.<span class="keyword">app</span>/Contents/Developer</span><br><span class="line">/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk</span><br><span class="line">/AppleInternal/OrderFiles/libobjc.<span class="keyword">order</span></span><br></pre></td></tr></table></figure>
 <p>修改工程配置，将Build Settings-&gt;Linking-&gt;Order File改为工程根目录下的libobjc.order，即：$(SRCROOT)/libobjc.order。</p>
 <ul>
-<li>提示library not found for -lCrashReporterClient<br>此时在 Build Settings -&gt; Linking -&gt; Other Linker Flags里删掉”-lCrashReporterClient”（Debug和Release都删了）</li>
-<li>提示SDK “macosx.internal” cannot be located.和unable to find utility “clang++”, not a developer tool or in PATH<pre><code>把Target-objc的Build Phases-&gt;Run Script(markgc)里的内容macosx.internal改为macosx，这里我猜测macosx.internal为苹果内部的macosx，说的不对，大家指出来。
+<li><p>提示library not found for -lCrashReporterClient<br>此时在 Build Settings -&gt; Linking -&gt; Other Linker Flags里删掉”-lCrashReporterClient”（Debug和Release都删了）</p>
+</li>
+<li><p>提示SDK “macosx.internal” cannot be located.和unable to find utility “clang++”, not a developer tool or in PATH</p>
+<pre><code>把Target-objc的Build Phases-&gt;Run Script(markgc)里的内容macosx.internal改为macosx，这里我猜测macosx.internal为苹果内部的macosx，说的不对，大家指出来。
 </code></pre></li>
-<li>提示no such public header file: ‘/tmp/objc.dst/usr/include/objc/ObjectiveC.apinotes’<br>  这里需要把Target-objc的Build Settings-&gt;Other Text-Based InstallAPI Flags里的内容设为空!<br>并且一定记得要把Text-Based InstallAPI Verification Model里的值改为Errors Only</li>
+<li><p>提示no such public header file: ‘/tmp/objc.dst/usr/include/objc/ObjectiveC.apinotes’<br>  这里需要把Target-objc的Build Settings-&gt;Other Text-Based InstallAPI Flags里的内容设为空!<br>并且一定记得要把Text-Based InstallAPI Verification Model里的值改为Errors Only</p>
+</li>
 </ul>
 <h3 id="添加测试target"><a href="#添加测试target" class="headerlink" title="添加测试target"></a>添加测试target</h3><ol>
 <li>找到TARGETS，点击下面的加号，添加一个<code>command line tool</code><img src="/2019/04/27/Runtime编译环境搭建/target_1.png" title="添加application"></li>
