@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_1.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_2.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_3.png">
-<meta property="og:updated_time" content="2019-04-28T10:08:12.011Z">
+<meta property="og:updated_time" content="2019-04-28T10:11:02.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime编译环境搭建">
 <meta name="twitter:description" content="首先，需要准备的资源：runtime完整源码，这个可以在苹果开放资源网页找到。点进这个页面，接着点击macOS下面的最新版本，在新页面中command+f搜索objc即可找到runtime源码，再点击右边的下载按钮即可得到。 到这里runtime源码已经准备好，除此之外，runtime源码的编译还需要添加一些必要的依赖。点击这里可以直达下载页面。 在这个资源页面找到以下开源代码，下载好合适的版本，">
@@ -420,9 +420,8 @@
 <ul>
 <li><p>提示library not found for -lCrashReporterClient<br>此时在 Build Settings -&gt; Linking -&gt; Other Linker Flags里删掉”-lCrashReporterClient”（Debug和Release都删了）</p>
 </li>
-<li><p>提示SDK “macosx.internal” cannot be located.和unable to find utility “clang++”, not a developer tool or in PATH</p>
-<pre><code>把Target-objc的Build Phases-&gt;Run Script(markgc)里的内容macosx.internal改为macosx，这里我猜测macosx.internal为苹果内部的macosx，说的不对，大家指出来。
-</code></pre></li>
+<li><p>提示SDK “macosx.internal” cannot be located.和unable to find utility “clang++”, not a developer tool or in PATH<br>把Target-objc的Build Phases-&gt;Run Script(markgc)里的内容macosx.internal改为macosx，这里我猜测macosx.internal为苹果内部的macosx，说的不对，大家指出来。</p>
+</li>
 <li><p>提示no such public header file: ‘/tmp/objc.dst/usr/include/objc/ObjectiveC.apinotes’<br>  这里需要把Target-objc的Build Settings-&gt;Other Text-Based InstallAPI Flags里的内容设为空!<br>并且一定记得要把Text-Based InstallAPI Verification Model里的值改为Errors Only</p>
 </li>
 </ul>
