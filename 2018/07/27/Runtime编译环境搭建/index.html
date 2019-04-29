@@ -82,20 +82,20 @@
 <meta name="description" content="首先，需要准备的资源：runtime完整源码，这个可以在苹果开放资源网页找到。点进这个页面，接着点击macOS下面的最新版本，在新页面中command+f搜索objc即可找到runtime源码，再点击右边的下载按钮即可得到。 到这里runtime源码已经准备好，除此之外，runtime源码的编译还需要添加一些必要的依赖。点击这里可以直达下载页面。 在这个资源页面找到以下开源代码，下载好合适的版本，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Runtime编译环境搭建">
-<meta property="og:url" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/07/27/Runtime编译环境搭建/index.html">
 <meta property="og:site_name" content="wenyu&#39;s blogs">
 <meta property="og:description" content="首先，需要准备的资源：runtime完整源码，这个可以在苹果开放资源网页找到。点进这个页面，接着点击macOS下面的最新版本，在新页面中command+f搜索objc即可找到runtime源码，再点击右边的下载按钮即可得到。 到这里runtime源码已经准备好，除此之外，runtime源码的编译还需要添加一些必要的依赖。点击这里可以直达下载页面。 在这个资源页面找到以下开源代码，下载好合适的版本，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/i386_1.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/i386_2.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_1.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_2.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/target_3.png">
-<meta property="og:updated_time" content="2019-04-28T10:11:02.337Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Runtime编译环境搭建/i386_1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Runtime编译环境搭建/i386_2.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Runtime编译环境搭建/target_1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Runtime编译环境搭建/target_2.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Runtime编译环境搭建/target_3.png">
+<meta property="og:updated_time" content="2019-04-29T08:30:20.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime编译环境搭建">
 <meta name="twitter:description" content="首先，需要准备的资源：runtime完整源码，这个可以在苹果开放资源网页找到。点进这个页面，接着点击macOS下面的最新版本，在新页面中command+f搜索objc即可找到runtime源码，再点击右边的下载按钮即可得到。 到这里runtime源码已经准备好，除此之外，runtime源码的编译还需要添加一些必要的依赖。点击这里可以直达下载页面。 在这个资源页面找到以下开源代码，下载好合适的版本，">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/27/Runtime编译环境搭建/i386_1.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/27/Runtime编译环境搭建/i386_1.png">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/27/Runtime编译环境搭建/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/27/Runtime编译环境搭建/"/>
 
 
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/Runtime编译环境搭建/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/Runtime编译环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘文裕">
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-27T22:57:42+08:00">
-                2019-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T22:57:42+08:00">
+                2018-07-27
               </time>
             
 
@@ -315,7 +315,7 @@
 
           
           
-             <span id="/2019/04/27/Runtime编译环境搭建/" class="leancloud_visitors" data-flag-title="Runtime编译环境搭建">
+             <span id="/2018/07/27/Runtime编译环境搭建/" class="leancloud_visitors" data-flag-title="Runtime编译环境搭建">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -360,7 +360,7 @@
 <li>launchd-842.92.1.tar.gz</li>
 <li>libplatform-177.200.16.tar.gz</li>
 </ul>
-<h2 id="下面开始正式编译流程"><a href="#下面开始正式编译流程" class="headerlink" title="下面开始正式编译流程"></a>下面开始正式编译流程</h2><h3 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h3><p><code>command+b</code>编译objc，报错：<code>The i386 architecture is deprecated. You should update your ARCHS build setting to remove the i386 architecture. (in target &#39;objc&#39;)</code>和<code>The i386 architecture is deprecated. You should update your ARCHS build setting to remove the i386 architecture. (in target &#39;objc-trampolines&#39;)</code>，选择<code>objc-&gt;TARGETS objc-&gt;build settings-&gt;architecture</code>，将<code>release</code>和<code>debug</code>模式都改为<strong>Standard Architectures</strong>。<br><img src="/2019/04/27/Runtime编译环境搭建/i386_1.png" title="i386错误"><br><img src="/2019/04/27/Runtime编译环境搭建/i386_2.png" title="i386错误"><br>继续<code>command+b</code>编译，<br>提示<code>&#39;sys/reason.h&#39; file not found</code>，在项目目录下创建一个文件夹<code>include</code>，用于存放所有需要导入工程的文件，并且把它添加到项目的<strong>Header Search Paths</strong>中，依次选择<code>objc-&gt;TARGETS-&gt;objc-&gt;Build Settings</code>，搜索框中输入<strong>header search path</strong>，然后加入<code>$(SRCROOT)/include</code></p>
+<h2 id="下面开始正式编译流程"><a href="#下面开始正式编译流程" class="headerlink" title="下面开始正式编译流程"></a>下面开始正式编译流程</h2><h3 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h3><p><code>command+b</code>编译objc，报错：<code>The i386 architecture is deprecated. You should update your ARCHS build setting to remove the i386 architecture. (in target &#39;objc&#39;)</code>和<code>The i386 architecture is deprecated. You should update your ARCHS build setting to remove the i386 architecture. (in target &#39;objc-trampolines&#39;)</code>，选择<code>objc-&gt;TARGETS objc-&gt;build settings-&gt;architecture</code>，将<code>release</code>和<code>debug</code>模式都改为<strong>Standard Architectures</strong>。<br><img src="/2018/07/27/Runtime编译环境搭建/i386_1.png" title="i386错误"><br><img src="/2018/07/27/Runtime编译环境搭建/i386_2.png" title="i386错误"><br>继续<code>command+b</code>编译，<br>提示<code>&#39;sys/reason.h&#39; file not found</code>，在项目目录下创建一个文件夹<code>include</code>，用于存放所有需要导入工程的文件，并且把它添加到项目的<strong>Header Search Paths</strong>中，依次选择<code>objc-&gt;TARGETS-&gt;objc-&gt;Build Settings</code>，搜索框中输入<strong>header search path</strong>，然后加入<code>$(SRCROOT)/include</code></p>
 <p>接下来需要去已下载好的开源项目中寻找reason.h头文件了，方式有两种：</p>
 <ul>
 <li><p>使用命令行：<br>进入刚才创建的开源代码目录下 cd ../opensources，这里需要按照自己的实际路径来cd</p>
@@ -426,9 +426,9 @@
 </li>
 </ul>
 <h3 id="添加测试target"><a href="#添加测试target" class="headerlink" title="添加测试target"></a>添加测试target</h3><ol>
-<li>找到TARGETS，点击下面的加号，添加一个<code>command line tool</code><img src="/2019/04/27/Runtime编译环境搭建/target_1.png" title="添加application"></li>
-<li>给新建的application添加依赖。  <img src="/2019/04/27/Runtime编译环境搭建/target_2.png" title="给application添加依赖"></li>
-<li>在application中添加测试代码   <img src="/2019/04/27/Runtime编译环境搭建/target_3.png" title="添加测试代码">
+<li>找到TARGETS，点击下面的加号，添加一个<code>command line tool</code><img src="/2018/07/27/Runtime编译环境搭建/target_1.png" title="添加application"></li>
+<li>给新建的application添加依赖。  <img src="/2018/07/27/Runtime编译环境搭建/target_2.png" title="给application添加依赖"></li>
+<li>在application中添加测试代码   <img src="/2018/07/27/Runtime编译环境搭建/target_3.png" title="添加测试代码">
  <strong> 在这里注意：添加测试类和之前一样。只不过它会走objc中的流程，因此可以在objc中打断点调试了。 </strong></li>
 <li>现在就可以在objc中打断点测试了，注意运行时选择刚刚自己添加的那个application</li>
 </ol>
@@ -485,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/22/Objective-C代码规范/" rel="next" title="Objective-C代码规范">
-                <i class="fa fa-chevron-left"></i> Objective-C代码规范
+              <a href="/2018/06/06/iOS开发中常用加密算法总结/" rel="next" title="iOS开发中常用加密算法总结">
+                <i class="fa fa-chevron-left"></i> iOS开发中常用加密算法总结
               </a>
             
           </div>
@@ -494,6 +494,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/22/Objective-C代码规范/" rel="prev" title="Objective-C代码规范">
+                Objective-C代码规范 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
