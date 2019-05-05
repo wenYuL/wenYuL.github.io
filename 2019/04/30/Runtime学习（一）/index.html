@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="wenyu&#39;s blogs">
 <meta property="og:description" content="Runtime简述基本概念Objective-C 扩展了 C 语言，并加入了面向对象特性和 Smalltalk 式的消息传递机制。而这个扩展的核心是一个用 C 和 编译语言 写的 Runtime 库。它是 Objective-C 面向对象和动态机制的基石。 Objective-C 是一个动态语言，这意味着它不仅需要一个编译器，也需要一个运行时系统来动态得创建类和对象、进行消息传递和转发。理解 Ob">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-05T07:32:24.156Z">
+<meta property="og:updated_time" content="2019-05-05T07:35:44.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime学习（一）概念简述、API整理">
 <meta name="twitter:description" content="Runtime简述基本概念Objective-C 扩展了 C 语言，并加入了面向对象特性和 Smalltalk 式的消息传递机制。而这个扩展的核心是一个用 C 和 编译语言 写的 Runtime 库。它是 Objective-C 面向对象和动态机制的基石。 Objective-C 是一个动态语言，这意味着它不仅需要一个编译器，也需要一个运行时系统来动态得创建类和对象、进行消息传递和转发。理解 Ob">
@@ -396,7 +396,10 @@
 <li>class_copyIvarList     拷贝类的实例变量列表</li>
 <li>class_copyMethodList     拷贝类的方法列表</li>
 <li>class_copyProtocolList     拷贝类遵循的协议列表</li>
-<li>class_copyPropertyList     拷贝类的属性列表<h3 id="object"><a href="#object" class="headerlink" title="object_"></a>object_</h3>object_函数关注于对象</li>
+<li>class_copyPropertyList     拷贝类的属性列表</li>
+</ul>
+<h3 id="object"><a href="#object" class="headerlink" title="object_"></a>object_</h3><p>object_函数关注于对象</p>
+<ul>
 <li>object_copy     对象copy(ARC无效)</li>
 <li>object_dispose     对象释放(ARC无效)</li>
 <li>object_getClassName     获取对象的类名</li>
@@ -405,7 +408,10 @@
 <li>object_getIvar     获取对象中实例变量的值</li>
 <li>object_setIvar     设置对象中实例变量的值</li>
 <li>object_getInstanceVariable     获取对象中实例变量的值 (ARC中无效,使用object_getIvar)</li>
-<li>object_setInstanceVariable     设置对象中实例变量的值 (ARC中无效,使用object_setIvar)<h3 id="method"><a href="#method" class="headerlink" title="method_"></a>method_</h3>method_系列函数关注于方法内部,如果方法的参数及返回值类型和方法的实现</li>
+<li>object_setInstanceVariable     设置对象中实例变量的值 (ARC中无效,使用object_setIvar)</li>
+</ul>
+<h3 id="method"><a href="#method" class="headerlink" title="method_"></a>method_</h3><p>method_系列函数关注于方法内部,如果方法的参数及返回值类型和方法的实现</p>
+<ul>
 <li>method_getName     获取方法名</li>
 <li>method_getImplementation     获取方法的实现</li>
 <li>method_getTypeEncoding     获取方法的类型编码</li>
@@ -423,7 +429,10 @@
 <li>property_getName     获取属性名</li>
 <li>property_getAttributes     获取属性的特性列表</li>
 <li>property_copyAttributeList     拷贝属性的特性列表</li>
-<li>property_copyAttributeValue     拷贝属性中某特性的值<h3 id="protocol"><a href="#protocol" class="headerlink" title="protocol_"></a>protocol_</h3>protocol_系类函数关注于协议</li>
+<li>property_copyAttributeValue     拷贝属性中某特性的值</li>
+</ul>
+<h3 id="protocol"><a href="#protocol" class="headerlink" title="protocol_"></a>protocol_</h3><p>protocol_系类函数关注于协议</p>
+<ul>
 <li>protocol_conformsToProtocol     判断一个协议是否遵循另一个协议</li>
 <li>protocol_isEqual     判断两个协议是否一致</li>
 <li>protocol_getName     获取协议名称</li>
