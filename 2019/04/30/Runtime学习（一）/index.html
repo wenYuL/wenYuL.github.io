@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS Point," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="Xcode自动打IPA包脚本 —-PPAutoPackageScript这个插件可以帮助开发者减去好多在创建IPA测试包的时间，提升开发效率。">
-<meta name="keywords" content="iOS Point">
+<meta name="description" content="Runtime简述基本概念Objective-C 扩展了 C 语言，并加入了面向对象特性和 Smalltalk 式的消息传递机制。而这个扩展的核心是一个用 C 和 编译语言 写的 Runtime 库。它是 Objective-C 面向对象和动态机制的基石。 Objective-C 是一个动态语言，这意味着它不仅需要一个编译器，也需要一个运行时系统来动态得创建类和对象、进行消息传递和转发。理解 Ob">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xcode自动打包脚本">
-<meta property="og:url" content="http://yoursite.com/2018/03/03/autoIPA/index.html">
+<meta property="og:title" content="Runtime学习（一）概念简述、API整理">
+<meta property="og:url" content="http://yoursite.com/2019/04/30/Runtime学习（一）/index.html">
 <meta property="og:site_name" content="wenyu&#39;s blogs">
-<meta property="og:description" content="Xcode自动打IPA包脚本 —-PPAutoPackageScript这个插件可以帮助开发者减去好多在创建IPA测试包的时间，提升开发效率。">
+<meta property="og:description" content="Runtime简述基本概念Objective-C 扩展了 C 语言，并加入了面向对象特性和 Smalltalk 式的消息传递机制。而这个扩展的核心是一个用 C 和 编译语言 写的 Runtime 库。它是 Objective-C 面向对象和动态机制的基石。 Objective-C 是一个动态语言，这意味着它不仅需要一个编译器，也需要一个运行时系统来动态得创建类和对象、进行消息传递和转发。理解 Ob">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/03/autoIPA/autoipa_1.jpg">
-<meta property="og:updated_time" content="2018-04-15T14:51:54.000Z">
+<meta property="og:updated_time" content="2019-05-05T07:27:24.981Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xcode自动打包脚本">
-<meta name="twitter:description" content="Xcode自动打IPA包脚本 —-PPAutoPackageScript这个插件可以帮助开发者减去好多在创建IPA测试包的时间，提升开发效率。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/03/autoIPA/autoipa_1.jpg">
+<meta name="twitter:title" content="Runtime学习（一）概念简述、API整理">
+<meta name="twitter:description" content="Runtime简述基本概念Objective-C 扩展了 C 语言，并加入了面向对象特性和 Smalltalk 式的消息传递机制。而这个扩展的核心是一个用 C 和 编译语言 写的 Runtime 库。它是 Objective-C 面向对象和动态机制的基石。 Objective-C 是一个动态语言，这意味着它不仅需要一个编译器，也需要一个运行时系统来动态得创建类和对象、进行消息传递和转发。理解 Ob">
 
 
 
@@ -122,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/03/autoIPA/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/30/Runtime学习（一）/"/>
 
 
 
 
 
-  <title>Xcode自动打包脚本 | wenyu's blogs</title>
+  <title>Runtime学习（一）概念简述、API整理 | wenyu's blogs</title>
   
 
 
@@ -265,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/autoIPA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/Runtime学习（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘文裕">
@@ -282,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Xcode自动打包脚本</h1>
+          <h1 class="post-title" itemprop="name headline">Runtime学习（一）概念简述、API整理</h1>
         
 
         <div class="post-meta">
@@ -294,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-03T13:42:19+08:00">
-                2018-03-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-30T16:14:26+08:00">
+                2019-04-30
               </time>
             
 
@@ -305,28 +302,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Small-points/" itemprop="url" rel="index">
-                    <span itemprop="name">Small points</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -334,7 +309,7 @@
 
           
           
-             <span id="/2018/03/03/autoIPA/" class="leancloud_visitors" data-flag-title="Xcode自动打包脚本">
+             <span id="/2019/04/30/Runtime学习（一）/" class="leancloud_visitors" data-flag-title="Runtime学习（一）概念简述、API整理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -365,10 +340,118 @@
       
 
       
-        <h1 id="Xcode自动打IPA包脚本-—-PPAutoPackageScript"><a href="#Xcode自动打IPA包脚本-—-PPAutoPackageScript" class="headerlink" title="Xcode自动打IPA包脚本 —-PPAutoPackageScript"></a>Xcode自动打IPA包脚本 —-PPAutoPackageScript</h1><p>这个插件可以帮助开发者减去好多在创建IPA测试包的时间，提升开发效率。<br><a id="more"></a><br>Xcode版本要在8.0之后（跟没说一样）。</p>
-<h2 id="下载PPAutoPackageScript安装包"><a href="#下载PPAutoPackageScript安装包" class="headerlink" title="下载PPAutoPackageScript安装包"></a>下载PPAutoPackageScript安装包</h2><p>直接在<a href="https://github.com/jkpang/PPAutoPackageScript" target="_blank" rel="noopener">GitHub</a>上下载，将安装包拷贝到 ~项目主目录下~，即和project.xcodeproj同目录下。</p>
-<h2 id="配置PPAutoPackageScript"><a href="#配置PPAutoPackageScript" class="headerlink" title="配置PPAutoPackageScript"></a>配置PPAutoPackageScript</h2><p>打开PPAutoPackageScript.sh文件，进行相关配置，如下图：<br><img src="/2018/03/03/autoIPA/autoipa_1.jpg" title="图片1"><br>图中所示四项是必须要自己重新配置的。</p>
-<h2 id="使用PPAutoPackageScript打包"><a href="#使用PPAutoPackageScript打包" class="headerlink" title="使用PPAutoPackageScript打包"></a>使用PPAutoPackageScript打包</h2><p>打开终端，cd到项目主目录PPAutoPackageScript文件夹下，执行<br><code>$ sh PPAutoPackageScript.sh</code><br>即可。</p>
+        <h2 id="Runtime简述"><a href="#Runtime简述" class="headerlink" title="Runtime简述"></a>Runtime简述</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>Objective-C 扩展了 C 语言，并加入了面向对象特性和 Smalltalk 式的消息传递机制。而这个扩展的核心是一个用 C 和 编译语言 写的 Runtime 库。它是 Objective-C 面向对象和动态机制的基石。</p>
+<p>Objective-C 是一个动态语言，这意味着它不仅需要一个编译器，也需要一个运行时系统来动态得创建类和对象、进行消息传递和转发。理解 Objective-C 的 Runtime 机制可以帮我们更好的了解这个语言，适当的时候还能对语言进行扩展，从系统层面解决项目中的一些设计或技术问题。</p>
+<h3 id="Runtime原理概述"><a href="#Runtime原理概述" class="headerlink" title="Runtime原理概述"></a>Runtime原理概述</h3><p><strong>Objective-C的是一个运行时面向语言，这意味着当它可能在运行时决定如何实现而不是在编译期。</strong> 这给你很大的灵活性，你可以根据需要将消息重定向到适当的对象，或者甚至有意交换方法实现等。如果我们将它与C语言进行对比。</p>
+<p><strong>在很多语言，比如 C ，调用一个方法其实就是跳到内存中的某一点并开始执行一段代码。</strong>没有任何动态的特性，因为这在编译时就决定好了。而在 Objective-C 中，[object foo] 语法并不会立即执行 foo 这个方法的代码。它是在运行时给 object 发送一条叫 foo 的消息。这个消息，也许会由 object 来处理，也许会被转发给另一个对象，或者不予理睬假装没收到这个消息。多条不同的消息也可以对应同一个方法实现。这些都是在程序运行的时候决定的。</p>
+<h3 id="Runtime版本"><a href="#Runtime版本" class="headerlink" title="Runtime版本"></a>Runtime版本</h3><p>Runtime其实有两个版本: “modern” 和 “legacy”。我们现在用的 Objective-C 2.0 采用的是现行 (Modern) 版的 Runtime 系统，只能运行在 iOS 和 macOS 10.5 之后的 64 位程序中。而 macOS 较老的32位程序仍采用 Objective-C 1 中的（早期）Legacy 版本的 Runtime 系统。这两个版本最大的区别在于当你更改一个类的实例变量的布局时，在早期版本中你需要重新编译它的子类，而现行版就不需要。</p>
+<h3 id="Runtime核心"><a href="#Runtime核心" class="headerlink" title="Runtime核心"></a>Runtime核心</h3><p><strong>消息传递 （Messaging）。</strong></p>
+<h2 id="调用Runtime的三种方式"><a href="#调用Runtime的三种方式" class="headerlink" title="调用Runtime的三种方式"></a>调用Runtime的三种方式</h2><ol>
+<li>通过Runtime API<br> 本篇文章最后统一整理了Runtime的API</li>
+<li><p>NSObject类定义的方法</p>
+ <figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(Class)</span>class OBJC_SWIFT_UNAVAILABLE<span class="params">(<span class="string">"use 'anObject.dynamicType' instead"</span>)</span>;</span><br><span class="line">- <span class="params">(BOOL)</span>isKindOfClass:<span class="params">(Class)</span>aClass;</span><br><span class="line">- <span class="params">(BOOL)</span>isMemberOfClass:<span class="params">(Class)</span>aClass;</span><br><span class="line">- <span class="params">(BOOL)</span>conformsToProtocol:<span class="params">(Protocol *)</span>aProtocol;</span><br><span class="line">- <span class="params">(BOOL)</span>respondsToSelector:<span class="params">(SEL)</span>aSelector;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接通过Objective-C代码，系统会自动帮我们调用Runtime实现，不用开发者去关注具体Runtime的过程。</p>
+</li>
+</ol>
+<h2 id="Runtime-API-整理"><a href="#Runtime-API-整理" class="headerlink" title="Runtime API 整理"></a>Runtime API 整理</h2><p>按照函数名前缀分为下面几个部分：</p>
+<h3 id="objc"><a href="#objc" class="headerlink" title="objc_"></a>objc_</h3><p>objc_函数主要关注于宏观使用，如类与协议的空间分配，注册，注销等操作。</p>
+<ul>
+<li>objc_getClass             获取Class对象</li>
+<li>objc_getMetaClass     获取MetaClass对象</li>
+<li>objc_allocateClassPair     分配空间,创建类(仅在 创建之后,注册之前 能够添加成员变量)</li>
+<li>objc_registerClassPair     注册一个类(注册后方可使用该类创建对象)</li>
+<li>objc_disposeClassPair     注销某个类</li>
+<li>objc_allocateProtocol     开辟空间创建协议</li>
+<li>objc_registerProtocol     注册一个协议</li>
+<li>objc_constructInstance     构造一个实例对象(ARC下无效)</li>
+<li>objc_destructInstance     析构一个实例对象(ARC下无效)</li>
+<li>objc_setAssociatedObject     为实例对象关联对象</li>
+<li>objc_getAssociatedObject     获取实例对象的关联对象</li>
+<li>objc_removeAssociatedObjects     清空实例对象的所有关联对象</li>
+</ul>
+<h3 id="class"><a href="#class" class="headerlink" title="class_"></a>class_</h3><p>class_函数关注于类的内部，如获取实例变量，属性，方法等。</p>
+<ul>
+<li>class_addIvar     为类添加实例变量</li>
+<li>class_addProperty     为类添加属性</li>
+<li>class_addMethod     为类添加方法</li>
+<li>class_addProtocol     为类遵循协议</li>
+<li>class_replaceMethod     替换类某方法的实现</li>
+<li>class_getName     获取类名</li>
+<li>class_isMetaClass     判断是否为元类</li>
+<li>objc_getProtocol     获取某个协议</li>
+<li>objc_copyProtocolList     拷贝在运行时中注册过的协议列表</li>
+<li>class_getSuperclass     获取某类的父类</li>
+<li>class_setSuperclass     设置某类的父类</li>
+<li>class_getProperty     获取某类的属性</li>
+<li>class_getInstanceVariable     获取实例变量</li>
+<li>class_getClassVariable     获取类变量</li>
+<li>class_getInstanceMethod     获取实例方法</li>
+<li>class_getClassMethod     获取类方法</li>
+<li>class_getMethodImplementation     获取方法的实现</li>
+<li>class_getInstanceSize     获取类的实例的大小</li>
+<li>class_respondsToSelector     判断类是否实现某方法</li>
+<li>class_conformsToProtocol     判断类是否遵循某协议</li>
+<li>class_createInstance     创建类的实例</li>
+<li>class_copyIvarList     拷贝类的实例变量列表</li>
+<li>class_copyMethodList     拷贝类的方法列表</li>
+<li>class_copyProtocolList     拷贝类遵循的协议列表</li>
+<li>class_copyPropertyList     拷贝类的属性列表<h3 id="object"><a href="#object" class="headerlink" title="object_"></a>object_</h3>object_函数关注于对象</li>
+<li>object_copy     对象copy(ARC无效)</li>
+<li>object_dispose     对象释放(ARC无效)</li>
+<li>object_getClassName     获取对象的类名</li>
+<li>object_getClass     获取对象的Class</li>
+<li>object_setClass     设置对象的Class</li>
+<li>object_getIvar     获取对象中实例变量的值</li>
+<li>object_setIvar     设置对象中实例变量的值</li>
+<li>object_getInstanceVariable     获取对象中实例变量的值 (ARC中无效,使用object_getIvar)</li>
+<li>object_setInstanceVariable     设置对象中实例变量的值 (ARC中无效,使用object_setIvar)<h3 id="method"><a href="#method" class="headerlink" title="method_"></a>method_</h3>method_系列函数关注于方法内部,如果方法的参数及返回值类型和方法的实现</li>
+<li>method_getName     获取方法名</li>
+<li>method_getImplementation     获取方法的实现</li>
+<li>method_getTypeEncoding     获取方法的类型编码</li>
+<li>method_getNumberOfArguments     获取方法的参数个数</li>
+<li>method_copyReturnType     拷贝方法的返回类型</li>
+<li>method_getReturnType     获取方法的返回类型</li>
+<li>method_copyArgumentType     拷贝方法的参数类型</li>
+<li>method_getArgumentType     获取方法的参数类型</li>
+<li>method_getDescription     获取方法的描述</li>
+<li>method_setImplementation     设置方法的实现</li>
+<li>method_exchangeImplementations     替换方法的实现<h3 id="property"><a href="#property" class="headerlink" title="property_"></a>property_</h3>property_系类函数关注于属性*内部,如属性的特性等</li>
+<li>property_getName     获取属性名</li>
+<li>property_getAttributes     获取属性的特性列表</li>
+<li>property_copyAttributeList     拷贝属性的特性列表</li>
+<li>property_copyAttributeValue     拷贝属性中某特性的值<br>###protocol_<br>protocol_系类函数关注于协议</li>
+<li>protocol_conformsToProtocol     判断一个协议是否遵循另一个协议</li>
+<li>protocol_isEqual     判断两个协议是否一致</li>
+<li>protocol_getName     获取协议名称</li>
+<li>protocol_copyPropertyList     拷贝协议的属性列表</li>
+<li>protocol_copyProtocolList     拷贝某协议所遵循的协议列表</li>
+<li>protocol_copyMethodDescriptionList     拷贝协议的方法列表</li>
+<li>protocol_addProtocol     为一个协议遵循另一协议</li>
+<li>protocol_addProperty     为协议添加属性</li>
+<li>protocol_getProperty     获取协议中的某个属性</li>
+<li>protocol_addMethodDescription     为协议添加方法描述</li>
+<li>protocol_getMethodDescription     获取协议中某方法的描述</li>
+</ul>
+<p>###ivar_</p>
+<ul>
+<li>ivar_getName     获取Ivar名称</li>
+<li>ivar_getTypeEncoding     获取类型编码</li>
+<li>ivar_getOffset     获取偏移量</li>
+</ul>
+<p>###sel_ </p>
+<ul>
+<li>sel_getName     获取名称</li>
+<li>sel_getUid     注册方法</li>
+<li>sel_registerName     注册方法</li>
+<li>sel_isEqual     判断方法是否相等</li>
+</ul>
+<p>###imp_</p>
+<ul>
+<li>imp_implementationWithBlock     通过代码块创建IMP</li>
+<li>imp_getBlock     获取函数指针中的代码块</li>
+<li>imp_removeBlock     移除IMP中的代码块</li>
+</ul>
 
       
     </div>
@@ -413,12 +496,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/iOS-Point/" rel="tag"># iOS Point</a>
-          
-        </div>
-      
 
       
       
@@ -428,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/09/iOS开发-KVO/" rel="next" title="iOS开发-KVO">
-                <i class="fa fa-chevron-left"></i> iOS开发-KVO
+              <a href="/2019/04/22/Objective-C代码规范/" rel="next" title="Objective-C代码规范">
+                <i class="fa fa-chevron-left"></i> Objective-C代码规范
               </a>
             
           </div>
@@ -438,8 +515,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/03/Swift引用计数/" rel="prev" title="Swift引用计数">
-                Swift引用计数 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/05/Runtime学习（二）/" rel="prev" title="Runtime学习（二）对象、类、方法本质分析">
+                Runtime学习（二）对象、类、方法本质分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -604,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode自动打IPA包脚本-—-PPAutoPackageScript"><span class="nav-number">1.</span> <span class="nav-text">Xcode自动打IPA包脚本 —-PPAutoPackageScript</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载PPAutoPackageScript安装包"><span class="nav-number">1.1.</span> <span class="nav-text">下载PPAutoPackageScript安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置PPAutoPackageScript"><span class="nav-number">1.2.</span> <span class="nav-text">配置PPAutoPackageScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用PPAutoPackageScript打包"><span class="nav-number">1.3.</span> <span class="nav-text">使用PPAutoPackageScript打包</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime简述"><span class="nav-number">1.</span> <span class="nav-text">Runtime简述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runtime原理概述"><span class="nav-number">1.2.</span> <span class="nav-text">Runtime原理概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runtime版本"><span class="nav-number">1.3.</span> <span class="nav-text">Runtime版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runtime核心"><span class="nav-number">1.4.</span> <span class="nav-text">Runtime核心</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用Runtime的三种方式"><span class="nav-number">2.</span> <span class="nav-text">调用Runtime的三种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime-API-整理"><span class="nav-number">3.</span> <span class="nav-text">Runtime API 整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#objc"><span class="nav-number">3.1.</span> <span class="nav-text">objc_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class"><span class="nav-number">3.2.</span> <span class="nav-text">class_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object"><span class="nav-number">3.3.</span> <span class="nav-text">object_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#method"><span class="nav-number">3.4.</span> <span class="nav-text">method_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property"><span class="nav-number">3.5.</span> <span class="nav-text">property_</span></a></li></ol></li></ol></div>
             
 
           </div>
