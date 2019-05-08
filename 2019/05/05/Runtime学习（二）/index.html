@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="wenyu&#39;s blogs">
 <meta property="og:description" content="对象、类本质分析通过源码可以看到他们两个都是一个结构体。 实例对象本质我们在初始化一个实例对象的时候通常是这样： Object *objc = [[Object alloc]init]; 那么，alloc和init分别作用是什么呢？经过查阅资料能发现，alloc的作用是系统会分配一块内存给对象，并且把地址返回给对象的isa指针，此时这个指针并不是对象最终的指针（悬挂指针），此时系统所分配的内存并没">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-08T03:07:28.472Z">
+<meta property="og:updated_time" content="2019-05-08T08:39:18.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime学习（二）对象、类、方法本质分析">
 <meta name="twitter:description" content="对象、类本质分析通过源码可以看到他们两个都是一个结构体。 实例对象本质我们在初始化一个实例对象的时候通常是这样： Object *objc = [[Object alloc]init]; 那么，alloc和init分别作用是什么呢？经过查阅资料能发现，alloc的作用是系统会分配一块内存给对象，并且把地址返回给对象的isa指针，此时这个指针并不是对象最终的指针（悬挂指针），此时系统所分配的内存并没">
@@ -347,7 +347,21 @@
 <p>我们再来看objc提供的源码：（也可以借助clang分析）</p>
 <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/// Represents an<span class="built_in"> instance </span>of a class.</span><br><span class="line">struct objc_object &#123;</span><br><span class="line">    Class _Nonnull isa  OBJC_ISA_AVAI<span class="class">LABILITY;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>根据objc源码可以看出，对象的本质就是<strong>一个结构体指针</strong>，而且只有一个isa指针，这个isa指向它对应的Class，由此可以推出对象占用的内存空间是8个字节（在64位系统下）。但是实际情况呢？系统实际分配了16个byte给对象，原因在于编译器做了内存对齐的操作。<strong>详情看本文最后部分。</strong></p>
-<p>那么对象在内存中是怎样存储的呢？<br>首先看三个能获取字节大小的函数：</p>
+<p>那么对象在内存中是怎样存储的呢？</p>
+<p>首先，对象一共分为三种：实例对象（instance）、类对象（class）、元类对象（meta-class）。</p>
+<ol>
+<li><p>实例对象 </p>
+<p> 通过alloc产生的对象，每一次alloc都会产生不同的实例对象；实例对象结构体中包含的信息有：1.isa指针 2.其他成员变量</p>
+<p> 那么实例对象的方法、协议、属性等信息存放在什么地方呢？<strong>class对象中。</strong></p>
+</li>
+<li><p>类对象</p>
+</li>
+</ol>
+<ol>
+<li>元类对象.<br><strong>每个类在内存中有且只有一个meta-class对象。</strong>meta-class对象的内存结构和class对象的结构几乎一致，区别在于元类对象结构中存储的方法列表是类对象的实例方法（也就是类的类方法），而类对象中存的是对象的实例方法。</li>
+</ol>
+<p>4.</p>
+<p>三个能获取字节大小的函数：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">sizeof</span><span class="params">()</span></span> 获取数据类型、变量所占的内存大小</span><br><span class="line"><span class="function"><span class="title">class_getInstanceSize</span><span class="params">()</span></span>  获取类的实例所需要系统分配的内存大小</span><br><span class="line"><span class="function"><span class="title">malloc_size</span><span class="params">()</span></span>  获取系统实际分配的内存大小</span><br></pre></td></tr></table></figure>
 <h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_class</span> :</span> objc_object &#123;</span><br><span class="line">    <span class="comment">// Class ISA;</span></span><br><span class="line">    Class superclass;</span><br><span class="line">    <span class="keyword">cache_t</span> cache;             <span class="comment">// formerly cache pointer and vtable</span></span><br><span class="line">    <span class="keyword">class_data_bits_t</span> bits;    <span class="comment">// class_rw_t * plus custom rr/alloc flags</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">class_rw_t</span> *data() &#123; </span><br><span class="line">        <span class="keyword">return</span> bits.data();</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="OC对象的生命周期"><a href="#OC对象的生命周期" class="headerlink" title="OC对象的生命周期"></a>OC对象的生命周期</h2><h2 id="补充：内存对齐"><a href="#补充：内存对齐" class="headerlink" title="补充：内存对齐"></a>补充：内存对齐</h2><h3 id="什么是内存对齐"><a href="#什么是内存对齐" class="headerlink" title="什么是内存对齐"></a>什么是内存对齐</h3><p>现在计算机系统分配内存都是按照byte字节分配的，从理论上讲存储任一数据都可以从任何地址开始。但是在实际内存分配中，系统会对数据的存储地址加以限制，他会要求数据的首地址是某个数（4或者8）的整数倍，这就叫作<strong>内存对齐</strong>。</p>
@@ -357,7 +371,7 @@
 <p>char类型占用1个byte，double类型占用8个byte，按理说这个结构体总共占用9个byte，但实际情况是16个byte。这就是<strong>内存对齐</strong>之后的结果。从输出的内存地址可以看出，char类型被分配了8个byte的存储空间。</p>
 <h3 id="内存对齐的原则"><a href="#内存对齐的原则" class="headerlink" title="内存对齐的原则"></a>内存对齐的原则</h3><p>内存对齐有<strong>三个原则</strong>：</p>
 <ol>
-<li>结构体第一个成员的偏移量（offset）为0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节。</li>
+<li>结构体第一个成员的偏移量（<strong>offset</strong>）为0，以后每个成员相对于结构体首地址的 <strong>offset</strong> 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节。</li>
 <li>数据成员为结构体：如果结构体的数据成员还为结构体，则该数据成员的“自身长度”为其内部最大元素的大小。(struct a 里存有 struct b，b 里有char,int,double等元素，那 b “自身长度”为 8)。</li>
 <li>结构体的总大小为 有效对齐值（对齐系数） 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节。</li>
 </ol>
